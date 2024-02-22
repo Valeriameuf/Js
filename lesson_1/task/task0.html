@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 0</title>
+</head>
+
+<body>
+    <h1>Задача 0</h1>
+    <p>Обчислити значення виразів:</p>
+    <ol>
+        <li>S1 = a+12+b</li>
+        <li>S2 = sqrt((a+b)/2a)</li>
+        <li>S3 = cbrt((a+b)*c)</li>
+        <li>S4 = sin(a/(-b))</li>
+    </ol>
+    <h3> Відповідь:</h3>
+    <ol>
+        <li>S1 = 23</li>
+        <li>S2 = 1.0488088481701516</li>
+        <li>S3 = 4.820284528350459</li>
+        <li>S4 = -0.5984721441039565</li>
+    </ol>
+    <script>
+        (function () {
+            const a = 5;
+            const b = 6;
+            const S = a + 12 + b;
+            console.log("S1=" + S);
+        })();
+        (function () {
+            const a = 5;
+            const b = 6;
+            const S = Math.pow((a + b) / (2 * a), 1 / 2);
+            console.log("S2=" + S);
+        })();
+
+        (function () {
+            const a = 10;
+            const b = 4;
+            const c = 8;
+            const S = Math.pow((a + b) * c, 1 / 3);
+            console.log("S3=" + S);
+        })();
+
+        (function () {
+            const a = 10;
+            const b = 4;
+            const S = Math.sin(a / -b);
+            console.log("S4=" + S);
+        })();
+    </script>
+</body>
+
+</html>

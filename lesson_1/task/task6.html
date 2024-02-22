@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Задача 6</title>
+</head>
+
+<body>
+    <script>
+        // вводимо неохідні дані у вигляді змінних
+
+        let product1 = parseInt(prompt('введіть кількість товару 1', 45));
+        let priceProduct1 = parseInt(prompt('введіть вартість товару 1', 170));
+
+        let product2 = parseInt(prompt('введіть кількість товару 2', 110));
+        let priceProduct2 = parseInt(prompt('введіть вартість товару 2', 145));
+
+        let product3 = parseInt(prompt('введіть кількість товару 3', 55));
+        let priceProduct3 = parseInt(prompt('введіть вартість товару 3', 95));
+
+        // обчислюємо результат
+
+        let totalPriceProduct1 = product1 * priceProduct1;
+        let totalPriceProduct2 = product2 * priceProduct2;
+        let totalPriceProduct3 = product3 * priceProduct3;
+        let totalPrice = totalPriceProduct1 + totalPriceProduct2 + totalPriceProduct3;
+        // виводимо результат
+
+        document.write(`
+        <h1>Задача 6</h1>
+
+        <p>
+          З клавіатури вводяться вартість товару та кількість одиниць 3 товарів. 
+          Обчислити вартість кожного товару окремо та загальну вартість. 
+          Вивести чек (як у супермаркеті) використовуючи елементи розмітки.
+        </p>
+
+        <div class="wrapper">
+          <p class="wrapper__top">Чек</p>
+          <div class="wrapper__prod">
+            <div class="parameters">
+              <div class="parameters__unit">${product1} x</div>
+              <div class="parameters__price">${priceProduct1}</div>
+          </div>
+            <div class="total-value">
+              <p>Перший товар</p>
+              <div class="total-price">${totalPriceProduct1}</div>
+            </div>
+          </div>
+
+          <div class="product-wrapper">
+            <div class="parameters">
+              <div class="parameters__unit">${product2} x</div>
+              <div class="parameters__price">${priceProduct2}</div>
+          </div>
+            <div class="total-value">
+              <p>Другий товар</p>
+              <div class="total-price">${totalPriceProduct2}</div>
+            </div>
+          </div>
+
+          <div class="product-wrapper">
+            <div class="parameters">
+              <div class="parameters__unit">${product3} x</div>
+              <div class="parameters__price">${priceProduct3}</div>
+          </div>
+            <div class="total-value">
+              <p>Третій товар</p>
+              <div class="total-price">${totalPriceProduct3}</div>
+            </div>
+          </div>
+
+          <div class="footer">
+            <p>Всього</p>
+            <div>${totalPrice}</div>
+          </div>
+        </div>
+      `)
+    </script>
+</body>
+
+</html>
