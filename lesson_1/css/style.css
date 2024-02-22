@@ -1,0 +1,28 @@
+@import "./reset.css";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 50px auto 0 auto;
+  width: 300px;
+  padding: 0 15px;
+  border: 1px solid #c20ebc;
+}
+
+.wrapper__top {
+  text-align: center;
+  margin: 15px 0;
+}
+
+.parameters,
+.total-value,
+.footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer {
+  padding: 15px 0 15px 0;
+  border-top: 1px solid #c20ebc;
+}

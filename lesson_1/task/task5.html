@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 5</title>
+</head>
+
+<body>
+    <h1>Задача 5</h1>
+    <p>Дано кількість секунд, що пройшла від початку доби. Визначити скільки це годин і хвилин.</p>
+    <p>Вшдповідь:</p>
+    <ol>
+        <li>0 h</li>
+        <li>21 m </li>
+        <li>40 sec</li>
+    </ol>
+    <script>
+        (function () {
+            let sec = 1300;
+            const h = parseInt(sec / (60 * 60));
+            sec -= h * 60 * 60;
+            const m = parseInt(sec / 60);
+            sec -= m * 60;
+            console.log(`${h}:${m}:${sec}`);
+        })();
+    </script>
+</body>
+
+</html>
