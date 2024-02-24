@@ -12,9 +12,6 @@
     <h1>Задача 7</h1>
     <p>Знайти суму випадкового номера місяця (від 1 до 12) та випадкового номера дня (від 0 до 6).</p>
     <script>
-        let day = parseInt(Math.random() * 6);
-        console.log(day);
-
         const numbers = []
         const getRandomNumber = (min, max) => {
             const number = Math.floor(min + Math.random() * (max - min))
@@ -24,6 +21,8 @@
                 return number
             }
         }
+        
+        let day = parseInt(Math.random() * 6);
         let randomMonth = getRandomNumber(1, 12);
         let sum = day + randomMonth;
 
