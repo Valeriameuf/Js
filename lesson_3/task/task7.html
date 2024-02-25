@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 7</title>
+</head>
+
+<body>
+    <h1><strong>Задача 7</strong></h1>
+    <p>З клавіатури вводиться номер місяця. Вивести до якої пори він відноситься
+    </p>
+    <script type="text/javascript">
+        let index = parseInt(prompt('Введіть номер місяця'));
+
+        if (index >= 1 && index <= 12) {
+            let season
+
+            if (index <= 2 || index === 12) {
+                season = 'Зима'
+            } else if (index <= 5) {
+                season = 'Весна'
+            } else if (index <= 8) {
+                season = 'Літо'
+            } else if (index <= 11) {
+                season = 'Осінь'
+            }
+
+            document.write('Пора року: ' + season);
+        } else {
+            alert('Номер місяця повинен бути числом у проміжку від 1 до 12')
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 1(додоткова)</title>
+</head>
+
+<body>
+    <h1><strong>Задача 1</strong></h1>
+    <p>Користувач вводить номер пункту меню і на екрані з’являється відповідне зображення смайла.</p>
+
+    <script>
+        const input = parseInt(prompt('1.Веселий\n2.Сумний\n3.Обурений\n\nВведіть номер пункту меню'))
+        if (input === 1) {
+            document.write("&#128512")
+        } else if (input === 2) {
+            document.write("&#128532")
+        } else if (input === 3) {
+            document.write("&#129324")
+        } else {
+            alert("Введений Вами пункт меню не знайден")
+        }
+
+    </script>
+</body>
+
+</html>

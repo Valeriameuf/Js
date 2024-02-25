@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 2</title>
+</head>
+
+<body>
+    <h1><strong>Задача 2</strong></h1>
+    <p>З клавіатури вводиться ціна товару і кількість грошей. Якщо грошей не вистачає то відмовляємо у покупці, інакше,
+        якщо ще
+        залишаються гроші, то пропонуємо купити лотерею за 4 грн.</p>
+    <script>
+        let error = false
+        const price = parseFloat(prompt("Ціна товару:"))
+
+        if (isNaN(price) || price < 1) {
+            alert('Ціна товару повинна бути числом або бути більше за 0')
+            error = true
+        }
+        if (error === false) {
+            let wallet = parseFloat(prompt("Кількість грошей:"))
+            const lotoTicket = 4
+            if (isNaN(wallet) || wallet < 0) {
+                alert('Кількість грошей повинна бути числом або не менше за 0')
+                error = true
+            }
+            if (error === false) {
+                if (price > wallet) {
+                    alert("Недостатньо коштів")
+                } else {
+                    wallet = wallet - price
+                    if (wallet >= lotoTicket) {
+                        alert("Пропонуємо купити лотерею за 4 грн")
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

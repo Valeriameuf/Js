@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 6</title>
+</head>
+
+<body>
+    <h1><strong>Задача 6</strong></h1>
+    <p>З клавіатури вводиться номер дня тижня. Вивести на екран назву дня.</p>
+
+    <script>
+        index = parseInt(prompt('Введіть номер дня тижня'));
+
+        if (index >= 1 && index <= 7) {
+            let day;
+
+            if (index === 1) {
+                day = 'Понеділок'
+            } else if (index === 2) {
+                day = 'Вівторок'
+            } else if (index === 3) {
+                day = 'Середа'
+            } else if (index === 4) {
+                day = 'Четвер'
+            } else if (index === 5) {
+                day = "П'ятниця"
+            } else if (index === 6) {
+                day = 'Субота'
+            } else if (index === 7) {
+                day = 'Неділя'
+            }
+
+            document.write('День тижня: ' + day);
+        } else {
+            alert('День тижня повинен бути числом у проміжку від 1 до 7')
+        }
+    </script>
+</body>
+
+</html>

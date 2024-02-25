@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 1</title>
+</head>
+
+<body>
+    <h1><strong>Задача 1</strong></h1>
+    <p>З клавіатури вводяться імена двох дітей та кількість у них цукерок. Вивести на екран ім’я тієї дитини, у якої
+        кількість
+        цукерок є більшою, або вивести, що кількість однакова.</p>
+    <script>
+        let error = false
+        const nameFirstChild = prompt("Ім'я першої дитини:")
+        const candiesFirstChild = parseInt(prompt("Кількість цукерок у першої дитини:"))
+
+        if (isNaN(candiesFirstChild) || candiesFirstChild < 0) {
+            alert('Кількість цукерок повинна бути числом або бути не менше за 0')
+            error = true
+        }
+
+        if (error === false) {
+            const nameSecondChild = prompt("Ім'я другої дитини:")
+            const candiesSecondChild = parseInt(prompt("Кількість цукерок у другої дитини:"))
+
+            if (isNaN(candiesSecondChild) || candiesSecondChild < 0) {
+                alert('Кількість цукерок повинна бути числом або бути не менше за 0')
+                error = true
+            }
+
+            if (error === false) {
+                if (candiesFirstChild > candiesSecondChild) {
+                    document.write("Кількість цукерок більше у:" + nameFirstChild)
+                } else {
+                    if (candiesFirstChild === candiesSecondChild) {
+                        document.write("Кількість цукерок однакова")
+                    } else {
+                        document.write("Кількість цукерок більше у:" + nameSecondChild)
+                    }
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>
