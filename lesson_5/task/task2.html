@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 2</title>
+</head>
+
+<body>
+    <h1>Задача 2</h1>
+    <p>Створити 10 елементів для введення цін продуктів</p>
+    <script>
+        let productInputsLayout = ""
+        for (let i = 1; i <= 10; i++) {
+            productInputsLayout += `
+                <label>Product # ${i}</label>
+                <input type="number">
+                <br>`
+        }
+        document.write(productInputsLayout)
+    </script>
+
+</body>
+
+</html>

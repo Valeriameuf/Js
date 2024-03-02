@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 10</title>
+</head>
+
+<body>
+    <h1>Задача 10</h1>
+    <p>Знайти суму всіх непарних чисел, що знаходяться між заданими користувачем числами</p>
+    <script>
+        const firstNumber = parseInt(prompt("Введіть перше число проміжку:"))
+        const secondNumber = parseInt(prompt("Введіть друге число проміжку:"))
+        let sum = 0
+
+        for (let i = firstNumber; i <= secondNumber; i++) {
+            if (i % 2 !== 0) {
+                sum += i
+            }
+        }
+        document.write(`Сумма: ${sum}`)
+    </script>
+</body>
+
+</html>
