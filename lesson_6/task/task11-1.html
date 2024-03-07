@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 11</title>
+</head>
+
+<body>
+    <h1>Задача 11</h1>
+    <p>Вивести на екран усі трицифрові числа, у яких перша цифра є більшою
+        або рівною за суму другої і третьої.</p>
+    <script>
+
+        for (let i = 100; i <= 999; i++) {
+            const lastNum = i % 10
+            const secondNum = ((i - lastNum) / 10) % 10
+            const firstNum = parseInt(i / 100)
+            if (firstNum >= secondNum + lastNum) {
+                document.write(i + "<br>")
+            }
+        }
+
+        // for (let i = 100; i <= 999; i++) {
+        //     const numberStr = i + ""
+        //     const a = parseInt(numberStr[0])
+        //     const b = parseInt(numberStr[1])
+        //     const c = parseInt(numberStr[2])
+        //     if (a >= b + c) {
+        //         document.write(i + "<br>")
+        //     }
+        // }
+
+    </script>
+</body>
+
+</html>

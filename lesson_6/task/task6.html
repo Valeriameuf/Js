@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 6</title>
+</head>
+
+<body>
+    <h1>Задача 6</h1>
+    <p>Інвестор вклав тис. грн на 20 років під 20% річних, податок складає 5% від суми прибутку.
+        Визначити за допомогою циклів
+        суму, яку він одержить.</p>
+    <script>
+        let investContribution = parseInt(prompt("Скільки тис.грн вклав інвестор?"))
+        const yearPersent = 0.2
+        const tax = 0.05
+        for (let i = 0; i < 20; i++) {
+            investContribution = investContribution + investContribution * yearPersent
+        }
+        investContribution = Math.round(investContribution - investContribution * tax)
+        document.write(`Сума яку одержить інвестор ${investContribution} грн`)
+
+
+    </script>
+</body>
+
+</html>

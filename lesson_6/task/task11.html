@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 11</title>
+</head>
+
+<body>
+    <h1>Задача 11</h1>
+    <p>Вивести на екран усі двоцифрові числа, у яких перша цифра є більшою або
+        рівною за другу.</p>
+    <script>
+        for (let i = 10; i <= 99; i++) {
+            const firstNumber = parseInt(i / 10)
+            const secondNumber = i - firstNumber * 10
+            if (firstNumber >= secondNumber) {
+                document.write(i + "<br>")
+            }
+            // if (parseInt(i / 10) >= i - parseInt(i / 10) * 10) {
+            //     document.write(i + "<br>")
+            // }
+        }
+    </script>
+</body>
+
+</html>
