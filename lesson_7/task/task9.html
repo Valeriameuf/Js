@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 9</title>
+</head>
+
+<body>
+    <h1>Задача 9</h1>
+    <p>Дано покази температур (довільна кількість). Розробити функцію, яка дозволить підрахувати
+        кількість від’ємних показів
+        температури.</p>
+    <script>
+
+        function calcNegativeTemperatureIndicators() {
+            let counter = 0
+            for (let i = 0; i < arguments.length; i++) {
+                const temperatureIndicator = arguments[i]
+                if (temperatureIndicator < 0) {
+                    counter++
+                }
+            }
+            return counter
+        }
+        document.write("Дано показники температури : -4, -5, 9, -7, -9<br>")
+        document.write("Kількість від’ємних показів температури :" + calcNegativeTemperatureIndicators(-4, -5, 9, -7, -9))
+
+    </script>
+</body>
+
+</html>

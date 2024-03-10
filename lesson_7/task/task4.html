@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 4</title>
+</head>
+
+<body>
+    <h1>Задача 4</h1>
+    <p>Створити функцію, яка для 3 заданих чисел знаходить одночасно декілька результатів: кількість
+        парних, кількість
+        додатних, кількість більших за 100.</p>
+
+    <script>
+        // operation 1  = pair
+        // operation 2  = positive
+        // operation 3  = greater than 100
+        function doMathOperation(firstNum, secondNum, thirdNum, operation) {
+            let counter = 0
+
+            if (operation === 1) {
+                if (firstNum % 2 === 0) {
+                    counter = counter + 1
+                }
+                if (secondNum % 2 === 0) {
+                    counter = counter + 1
+                }
+                if (thirdNum % 2 === 0) {
+                    counter = counter + 1
+                }
+                return counter
+            } else if (operation === 2) {
+                if (firstNum > 0) {
+                    counter = counter + 1
+                }
+                if (secondNum > 0) {
+                    counter = counter + 1
+                }
+                if (thirdNum > 0) {
+                    counter = counter + 1
+                }
+                return counter
+            } else if (operation === 3) {
+                if (firstNum > 100) {
+                    counter = counter + 1
+                }
+                if (secondNum > 100) {
+                    counter = counter + 1
+                }
+                if (thirdNum > 100) {
+                    counter = counter + 1
+                }
+                return counter
+            }
+
+        }
+        const enteredFirstNum = parseInt(prompt("Введіть перше число"))
+        const enteredSecondNum = parseInt(prompt("Введіть друге число"))
+        const enteredThirdNum = parseInt(prompt("Введіть трете число"))
+
+        const pairOperation = 1
+        const positiveOperation = 2
+        const greaterThan100Operation = 3
+        document.write(`<b>Passed numbers:</b> ${enteredFirstNum}, ${enteredSecondNum}, ${enteredThirdNum}<br>`)
+        document.write('Number of paired numbers: ' + doMathOperation(enteredFirstNum, enteredSecondNum, enteredThirdNum, pairOperation) + "<br>")
+        document.write('Number of positive numbers: ' + doMathOperation(enteredFirstNum, enteredSecondNum, enteredThirdNum, positiveOperation) + "<br>")
+        document.write('Number of numbers greater than 100 : ' + doMathOperation(enteredFirstNum, enteredSecondNum, enteredThirdNum, greaterThan100Operation))
+    </script>
+</body>
+
+</html>

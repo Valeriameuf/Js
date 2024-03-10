@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 3</title>
+</head>
+
+<body>
+    <h1>Задача 3</h1>
+    <p>Створити окремі функції, які для 4 чисел знаходять:</p>
+    <ol>
+        <li>суму;</li>
+        <li>добуток;</li>
+        <li>середнє арифметичне;</li>
+        <li>мінімальне значення.</li>
+    </ol>
+    <script>
+        function sum(firstNum, secondNum, thirdNum, fourthNum) {
+            return firstNum + secondNum + thirdNum + fourthNum
+        }
+        function multiply(firstNum, secondNum, thirdNum, fourthNum) {
+            return firstNum * secondNum * thirdNum * fourthNum
+        }
+        function average(firstNum, secondNum, thirdNum, fourthNum) {
+            return sum(firstNum, secondNum, thirdNum, fourthNum) / 4
+        }
+        function min(firstNum, secondNum, thirdNum, fourthNum) {
+            if (firstNum <= secondNum && firstNum <= thirdNum && firstNum <= fourthNum) {
+                return firstNum
+            } else if (secondNum <= firstNum && secondNum <= thirdNum && secondNum <= fourthNum) {
+                return secondNum
+            } else if (thirdNum <= firstNum && thirdNum <= secondNum && thirdNum <= fourthNum) {
+                return thirdNum
+            } else if (fourthNum <= firstNum && fourthNum <= secondNum && fourthNum <= thirdNum) {
+                return fourthNum
+            }
+        }
+        const firstNum = parseInt(prompt("Введіть перше число:"))
+        const secondNum = parseInt(prompt("Введіть друге число:"))
+        const thirdNum = parseInt(prompt("Введіть трете число:"))
+        const fourthNum = parseInt(prompt("Введіть четверте число:"))
+        document.write('Sum: ' + sum(firstNum, secondNum, thirdNum, fourthNum) + '<br>')
+        document.write('Multiply: ' + multiply(firstNum, secondNum, thirdNum, fourthNum) + '<br>')
+        document.write('Average: ' + average(firstNum, secondNum, thirdNum, fourthNum) + '<br>')
+        document.write('Min number: ' + min(firstNum, secondNum, thirdNum, fourthNum) + '<br>')
+    </script>
+</body>
+
+</html>

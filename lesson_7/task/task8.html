@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 8 </title>
+</head>
+
+<body>
+    <h1>Задача 8</h1>
+    <p>Створити функцію, яка виводить банер (у функцію передаються: зображення, заголовок та посилання,
+        куди переходимо при
+        кліку на зображення (тег img повине знаходитись у середині тега a:&lt;a&gt;&lt;img src=”шлях”&gt;&lt;/a&gt;
+    </p>
+
+    <script>
+        const linkBanner = "https://global.typology.com/"
+        const titleBanner = "NEW: SPF 50"
+        const imgPath = "./img/hero-section.jpg"
+        function getBanner(linkBanner, titleBanner, imgPath) {
+            const html = `<a class="banner" href="${linkBanner}">
+                            <div class="text">
+                                <h2>${titleBanner}</h2>
+                            </div>
+                            <img src="${imgPath}">
+                          </a>`
+            return html
+        }
+        document.write(getBanner(linkBanner, titleBanner, imgPath))
+    </script>
+</body>
+<style>
+    .banner {
+        display: block;
+        position: relative;
+    }
+
+    .text {
+        position: absolute;
+        top: 50%;
+        left: 2.5rem;
+    }
+</style>
+
+</html>

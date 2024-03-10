@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 5</title>
+</head>
+
+<body>
+    <h1>Задача 5</h1>
+    <p>Створити окремі функції, які переводять:</p>
+    <ol>
+        <li>Сантиметри у дюйми;</li>
+        <li>Кілограми у фунти;</li>
+        <li>Кілометри у милі.</li>
+    </ol>
+    <script>
+        function convertCmToInches(cm) {
+            const inchesInOneCm = 0.3937
+            return cm * inchesInOneCm
+        }
+        function convertKgToLb(kg) {
+            const lbsInOneKg = 2.20462
+            return kg * lbsInOneKg
+        }
+        function convertKmToMile(km) {
+            const milesInOneKm = 0.621371
+            return km * milesInOneKm
+        }
+        const enteredNumber = parseFloat(prompt("Введіть число для конвертації: "))
+        document.write("Cm to inches: " + convertCmToInches(enteredNumber) + "<br>")
+        document.write("Kg to lb: " + convertKgToLb(enteredNumber) + "<br>")
+        document.write("Km to miles: " + convertKmToMile(enteredNumber))
+    </script>
+</body>
+
+</html>
