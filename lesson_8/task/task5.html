@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 5</title>
+</head>
+
+<body>
+    <h1>Задача 5</h1>
+    <p>Дано послідовність оцінок учня. Підрахувати кількість:</p>
+    <ol>
+        <li>двійок</li>
+        <li>кількість хороших оцінок (добре, відмінно);</li>
+        <li>кількість оцінок, які нижче середнього.</li>
+    </ol>
+    <script>
+        let userRating = [3, 5, 5, 5, 3, 4, 2, 2]
+        function isAssessmentTwo(...userRating) {
+            let assessment = 0
+            for (let i = 0; i < userRating.length; i++) {
+                if (userRating[i] === 2) {
+                    assessment++
+                }
+            }
+            return assessment
+        }
+        document.write(`Кількість двійок ${isAssessmentTwo(...userRating)} <br>`)
+
+        function isHighScore(...userRating) {
+            let assessment = 0
+            for (let i = 0; i < userRating.length; i++) {
+                if (userRating[i] === 4 || userRating[i] === 5) {
+                    assessment++
+                }
+            }
+            return assessment
+        }
+        document.write(`Кількість високих балів ${isHighScore(...userRating)} <br>`)
+
+        function getAverageRating(...userRating) {
+            let assessment = 0
+            for (let i = 0; i < userRating.length; i++) {
+                if (userRating[i] === 3) {
+                    assessment++
+                }
+            }
+            return assessment
+        }
+        document.write(`Кількість оцінок нижче середнього ${getAverageRating(...userRating)} <br>`)
+    </script>
+</body>
+
+</html>

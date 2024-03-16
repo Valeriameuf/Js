@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 8</title>
+</head>
+
+<body>
+    <h1>Задача 8</h1>
+    <p>Дано одновимірний масив, у якому зберігається певна виграшна сума (елементи заповнюються випадковим чином
+        значеннями від
+        -500 до 500). Надаючи користувачу можливість вибирати номери елементів (поки він не відмовиться). Знаходити
+        сумарний
+        виграш.</p>
+    <script>
+        function getRandomNumberList(amountNumbers) {
+            let result = []
+            for (let i = 0; i < amountNumbers; i++) {
+                let randomNum = -500 + Math.floor(Math.random() * (500 - (-500) + 1))
+                result.push(randomNum)
+            }
+            return result
+        }
+        const amountNumbers = 100
+        const numberList = getRandomNumberList(amountNumbers)
+        let userWinning = 0
+
+        do {
+            let currWinningSum = 0
+            let enteredElemIndex = prompt(`Введіть число від 1 до ${amountNumbers}:`)
+
+            if (enteredElemIndex === null) {
+                alert("Ваш сумарний виграш: " + userWinning)
+                break
+            }
+
+            enteredElemIndex = parseInt(enteredElemIndex) - 1
+
+            if (numberList[enteredElemIndex] !== undefined) {
+                currWinningSum = numberList[enteredElemIndex]
+                userWinning += currWinningSum
+            }
+
+            alert(`Вам випала сума: ${currWinningSum}, Ваш поточний виграш: ${userWinning}`)
+        } while (true);
+    </script>
+</body>
+
+</html>
