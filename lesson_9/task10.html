@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 10</title>
+</head>
+
+<body>
+    <h1>Задача 10</h1>
+    <p>Дано масив цін у грн. Податок складає 20%.
+        Сформувати масив, який буде містити величину сплаченого податку у грн.
+    </p>
+    <script>
+        let prices = [300, 400, 250, 480, 900]
+        const percent = 0.2
+        prices = prices.map(price => price * percent)
+        console.log(prices)
+    </script>
+</body>
+
+</html>
