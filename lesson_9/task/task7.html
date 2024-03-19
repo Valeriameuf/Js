@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 7</title>
+</head>
+
+<body>
+    <h1>Задача 7</h1>
+    <p>.Дано масив цін.
+        Змінити цей масив так, що на ціни товарів, які більші за 1000 грн. дати 30% знижки.
+    </p>
+    <script>
+        let prices = [1200, 300, 800, 1500, 1800, 650]
+         const percent = 0.3
+        prices = prices.map(price => {
+        if (price > 1000) {
+            return price * (1 - percent)
+        }
+        return price
+    })
+    console.log(prices)
+
+       
+        // for (let i = 0; i < prices.length; i++) {
+        //     if (prices[i] > 1000) {
+        //         // price[i] = (1 - percent) * price[i]
+        //         prices[i] *= (1 - percent)
+        //     }
+        // }
+        // prices = prices.map(price => price > 1000 ? price * (1 - percent) : price)
+        
+        // prices = prices.map(price => {
+        //     return price > 1000 ? price * (1 - percent) : price
+        // })
+    </script>
+</body>
+
+</html>
