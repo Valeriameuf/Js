@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 6</title>
+</head>
+
+<body>
+    <h1>Задача 6</h1>
+    <p>
+        Дано історію цін на цінні папери за деякий період (згенерувати від 1 до 10000)
+    </p>
+    <p>Визначити, чи є ціна, що менше 1000</p>
+    <script>
+        function getSecurities(minPrice, maxPrice, amount) {
+            const result = [];
+
+            while (result.length < amount) {
+                const randomPrice = Math.floor(Math.random() * (maxPrice - minPrice)) + minPrice;
+                if (result.indexOf(randomPrice) === -1) {
+                    result.push(randomPrice);
+                }
+            }
+
+            return result;
+        }
+
+        const securities = getSecurities(1, 10000, 10)
+        const securitiesLess1000 = securities.filter(price => price < 1000)
+        document.write(securitiesLess1000.length > 0
+            ? `Є ціни менші за 1000 ${securitiesLess1000}`
+            : `Немає цін менших за 1000`)
+        // if (securitiesLess1000.length > 0) {
+        //     document.write(`Є ціни менші за 1000 ${securitiesLess1000}`)
+        // } else {
+        //     document.write(`Немає цін менших за 1000`)
+        // }
+    </script>
+</body>
+
+</html>

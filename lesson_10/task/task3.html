@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 3</title>
+</head>
+
+<body>
+    <h1>Задача 3</h1>
+    <p>
+        Дано історію цін на цінні папери за деякий період (згенерувати від 1 до 10000)
+    </p>
+    <p>Сформувати список з тих цін, які більші за попереднє значення</p>
+    <script>
+        function getSecurities(minPrice, maxPrice, amount) {
+            const result = [];
+
+            while (result.length < amount) {
+                const randomPrice = Math.floor(Math.random() * (maxPrice - minPrice)) + minPrice;
+                if (result.indexOf(randomPrice) === -1) {
+                    result.push(randomPrice);
+                }
+            }
+
+            return result;
+        }
+
+        const securities = getSecurities(1, 10000, 10)
+        const securitiesWhichGreaterPrevOne = securities.filter(
+            (price, index) => index === 0 || price > securities[index - 1]
+        )
+        document.write(`<h2>Згенеровані ціни на цінні папери: </h2>${securities}<br><h2>Сформований новий масив: </h2>${securitiesWhichGreaterPrevOne}`)
+    </script>
+</body>
+
+</html>

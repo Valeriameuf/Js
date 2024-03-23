@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 2</title>
+</head>
+
+<body>
+    <h1>Задача 2</h1>
+    <p>
+        Дано історію цін на цінні папери за деякий період (згенерувати від 1 до 10000)
+    </p>
+    <p>Сформувати новий масив, у якому є номери тільки тих, що більші за 1000 грн.</p>
+    <script>
+        function getSecurities(minPrice, maxPrice, amount) {
+            const result = [];
+
+            while (result.length < amount) {
+                const randomPrice = Math.floor(Math.random() * (maxPrice - minPrice)) + minPrice;
+                if (result.indexOf(randomPrice) === -1) {
+                    result.push(randomPrice);
+                }
+            }
+
+            return result;
+        }
+
+        const securities = getSecurities(1, 10000, 10)
+        const securitiesIndexesGreater1000 = securities.reduce(
+            (accumulator, price, index) => price > 1000 ? [...accumulator, index + 1] : accumulator,
+            []
+        )
+        document.write(`<h2>Згенеровані ціни на цінні папери: </h2>${securities}<br><h2>Сформований новий масив: </h2>${securitiesIndexesGreater1000}`)
+    </script>
+</body>
+
+</html>
