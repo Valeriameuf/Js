@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 1</title>
+</head>
+
+<body>
+    <h1>Задача 1</h1>
+    <h2>
+        Знайти суми елементів у вказаній області
+    </h2>
+    <ol>
+        <li>номери рядків від 0 до половини, стовпці від 0 до половини</li>
+        <li>номери рядків від 0 до половини, стовпці від половини до кінця</li>
+        <li>номери рядків (від половини до кінця, стовпці від 0 до половини</li>
+        <li>номери рядків від половини до кінця , стовпці від половини до кінця</li>
+        <li>Суму парних рядків</li>
+        <li>Суму непарних стовпців</li>
+        <li>У парних рядках – непарні стовпці, у непарних – парні</li>
+    </ol>
+    <script>
+        const arr = [
+            [12, 14, 16, 17],
+            [18, 19, 20, 21],
+            [22, 23, 24, 25],
+            [26, 27, 28, 29]
+        ]
+
+        function getResultOfSubtask1(arr) {
+            let sum = 0
+            for (let rowIndex = 0; rowIndex < 2; rowIndex++) {
+                for (let colIndex = 0; colIndex < 2; colIndex++) {
+                    sum += arr[rowIndex][colIndex]
+                }
+            }
+            return sum
+        }
+
+        function getResultOfSubtask2(arr) {
+            let sum = 0
+            for (let rowIndex = 0; rowIndex < 2; rowIndex++) {
+                for (let colIndex = 2; colIndex < 4; colIndex++) {
+                    sum += arr[rowIndex][colIndex]
+                }
+            }
+            return sum
+        }
+        function getResultOfSubtask3(arr) {
+            let sum = 0
+            for (let rowIndex = 2; rowIndex < 4; rowIndex++) {
+                for (let colIndex = 0; colIndex < 2; colIndex++) {
+                    sum += arr[rowIndex][colIndex]
+                }
+            }
+            return sum
+        }
+        function getResultOfSubtask4(arr) {
+            let sum = 0
+            for (let rowIndex = 2; rowIndex < 4; rowIndex++) {
+                for (let colIndex = 2; colIndex < 4; colIndex++) {
+                    sum += arr[rowIndex][colIndex]
+                }
+            }
+            return sum
+        }
+        function getResultOfSubtask5(arr) {
+            let sum = 0
+            for (let rowIndex = 0; rowIndex < 4; rowIndex += 2) {
+                sum += arr[rowIndex].reduce((accumulator, value) => accumulator += value, 0)
+            }
+            return sum
+        }
+
+        function getResultOfSubtask6(arr) {
+            let sum = 0
+            for (const row of arr) {
+                for (let colIndex = 1; colIndex < 4; colIndex += 2) {
+                    sum += row[colIndex]
+                }
+            }
+            return sum
+        }
+        function getResultOfSubtask7(arr) {
+            let sum = 0
+            for (let rowIndex = 0; rowIndex < 4; rowIndex++) {
+                for (let colIndex = 0; colIndex < 4; colIndex++) {
+                    if (rowIndex % 2 === 0 && colIndex % 2 !== 0) {
+                        sum += arr[rowIndex][colIndex]
+                    } else if (rowIndex % 2 !== 0 && colIndex % 2 === 0) {
+                        sum += arr[rowIndex][colIndex]
+                    }
+                }
+            }
+            return sum
+        }
+
+        document.write(
+            `Підзадача 1, результат: ${getResultOfSubtask1(arr)}<br>
+            Підзадача 2, результат: ${getResultOfSubtask2(arr)}<br>
+            Підзадача 3, результат: ${getResultOfSubtask3(arr)}<br>
+            Підзадача 4, результат: ${getResultOfSubtask4(arr)}<br>
+            Підзадача 5, результат: ${getResultOfSubtask5(arr)}<br>
+            Підзадача 6, результат: ${getResultOfSubtask6(arr)}<br>
+            Підзадача 7, результат: ${getResultOfSubtask7(arr)}<br>`)
+    </script>
+</body>
+
+</html>

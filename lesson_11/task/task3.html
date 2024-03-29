@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 3</title>
+</head>
+
+<body>
+    <h1>Задача 3</h1>
+    <p>Морський бій. Випадковим чином на двовимірному полі розміром 6*6 розташовується 5 кораблів.
+        Користувач стріляє вказуючи координати.
+        Гра продовжується поки не потоплено усі кораблі або
+        у користувача не закінчаться снаряди.</p>
+    <script>
+        function generateGameMap(rowsNumber, colsNumber, exposedShips) {
+            const gameMap = []
+            for (let rowIndex = 0; rowIndex < rowsNumber; rowIndex++) {
+                gameMap[rowIndex] = []
+                for (let colIndex = 0; colIndex < colsNumber; colIndex++) {
+                    gameMap[rowIndex].push(0)
+                }
+            }
+
+            while (exposedShips > 0) {
+                point = getRandPoint()
+
+                if (gameMap[point[0]][point[1]] === 1) {
+                    continue
+                }
+
+                gameMap[point[0]][point[1]] = 1
+                exposedShips--
+            }
+
+            return gameMap
+        }
+
+        function getRandPoint() {
+            return [Math.floor(Math.random() * 6), Math.floor(Math.random() * 6)]
+        }
+
+        function isHit(userShot) {
+            if (gameMap[userShot[0]] === undefined) {
+                return false
+            }
+
+            if (gameMap[userShot[0]][userShot[1]] === undefined) {
+                return false
+            }
+
+            if (gameMap[userShot[0]][userShot[1]] === 1) {
+                return true;
+            }
+
+            return false;
+        }
+
+        function isValidUserShot(userShot) {
+            userShot = userShot.split(',')
+
+            if (userShot.length < 2) {
+                return false
+            }
+
+            userShot.forEach(function (point, index, userShot) {
+                userShot[index] = +point
+            });
+
+            if (isNaN(userShot[0]) || userShot[0] < 1 || userShot[0] > 6) {
+                return false
+            }
+
+            if (isNaN(userShot[1]) || userShot[1] < 1 || userShot[1] > 6) {
+                return false
+            }
+
+            return true
+        }
+
+        function runGame(gameMap, shoots, aliveShips) {
+            while (true) {
+                console.log('shoots', shoots)
+                console.log('ships', aliveShips)
+                if (shoots < 1) {
+                    alert('Закінчились постріли')
+                    break
+                }
+                if (aliveShips < 1) {
+                    alert('Ви потопили усі кораблі')
+                    break
+                }
+
+                let userShot = prompt('Введіть координати пострілу за зразком (3,3): ')
+
+                if (userShot === null) {
+                    break
+                }
+
+                if (!isValidUserShot(userShot)) {
+                    alert('Ви ввели невалідні координати. Введіть координати пострілу за зразком(3, 3): ')
+                    continue
+                }
+
+                userShot = userShot.split(",")
+                userShot.forEach(function (point, index, userShot) {
+                    userShot[index] = point - 1
+                })
+
+                shoots--
+
+                if (isHit(userShot)) {
+                    aliveShips--
+                    gameMap[userShot[0]][userShot[1]] = 0
+                    alert('Корабель пішов на дно...')
+                } else {
+                    alert('Ви не влучили, спробуйте ще раз')
+                }
+            }
+        }
+
+        // Initializing the game
+        const gameMap = generateGameMap(6, 6, 5)
+        const shoots = 10
+        const aliveShips = 5
+
+        console.log(gameMap)
+
+        // Running the game in 3 seconds for unlocking console in order to see gameMap
+        setTimeout(runGame, 3000, gameMap, shoots, aliveShips)
+    </script>
+</body>
+
+</html>

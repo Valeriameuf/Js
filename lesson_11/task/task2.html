@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 2</title>
+</head>
+
+<body>
+    <h1>Задача 2</h1>
+    <h2>
+        Дано інформацію про прибуток К магазинів протягом тижня. Знайти :
+    </h2>
+    <ol>
+        <li>загальний прибуток кожного масиву за тиждень;</li>
+        <li>загальний прибуток усіх магазинів по дням (загальний прибуток усіх магазинів за понеділок, за
+            вівторок, і т.д.);</li>
+        <li>загальний прибуток за робочі дні</li>
+        <li>загальний прибуток за вихідні дні</li>
+        <li>максимальний прибуток за середу</li>
+        <li>сформувати загальний список (одновимірний масив) зі значенням, які що більші за 200</li>
+        <li>відсортувати кожен тиждень за зростанням</li>
+        <li>відсортувати тижні (рядки) за спаданням максимального елементи у цьому тижні (рядку), тобто при порівнянні
+            рядків
+            потрібно порівнювати максимальні елементи у кожному з цих рядків</li>
+        <li>упорядкувати тижні (рядки) за спаданням суми елементів у рядку (тобто при порівнянні двох рядків треба
+            знайти суму
+            кожного з рядків і порівнювати ці суми, на основі цих сум буде зрозуміло, який з елементів повинен іти
+            раніше).</li>
+    </ol>
+    <script>
+        function generateStoresProfitTable(rowsNumber, colsNumber, minValue, maxValue) {
+            const table = []
+            for (let rowIndex = 0; rowIndex < rowsNumber; rowIndex++) {
+                table[rowIndex] = []
+                for (let colIndex = 0; colIndex < colsNumber; colIndex++) {
+                    table[rowIndex].push(minValue + Math.floor(Math.random() * (maxValue - minValue + 1)))
+                }
+            }
+            return table
+        }
+
+        const storesProfit = generateStoresProfitTable(10, 7, 1800, 2900)
+
+        function getEveryStoreProfitWeekly(storesProfit) {
+            const result = []
+            for (const storeProfit of storesProfit) {
+                result.push(storeProfit.reduce((accumulator, dayProfit) => accumulator += dayProfit, 0))
+            }
+            return result
+        }
+        function getStoresProfitDaily(storesProfit) {
+            const result = []
+            for (const storeProfit of storesProfit) {
+                for (let day = 0; day < 7; day++) {
+                    if (result[day] === undefined) {
+                        result[day] = 0
+                    }
+                    result[day] += storeProfit[day]
+                }
+            }
+            return result
+        }
+        function getStoresProfitAtWorkDays(storesProfit) {
+            let profit = 0
+            for (const storeProfit of storesProfit) {
+                for (let day = 0; day < 5; day++) {
+                    profit += storeProfit[day]
+                }
+            }
+            return profit
+        }
+
+        function getStoresProfitAtWeekend(storesProfit) {
+            let profit = 0
+            for (const storeProfit of storesProfit) {
+                for (let day = 5; day < 7; day++) {
+                    profit += storeProfit[day]
+                }
+            }
+            return profit
+        }
+
+        function getStoresMaxProfitAtWednesday(storesProfit) {
+            let profit = 0
+            for (const storeProfit of storesProfit) {
+                const currWednesdayProfit = storeProfit[2]
+                if (currWednesdayProfit > profit) {
+                    profit = currWednesdayProfit
+                }
+            }
+            return profit
+        }
+
+        function getProfitsGreater200(storesProfit) {
+            return storesProfit.flat().filter(profit => profit > 200)
+        }
+
+        function sortStoresProfit(storesProfit) {
+            const storesProfitCopy = JSON.parse(JSON.stringify(storesProfit))
+
+            for (const storeProfit of storesProfitCopy) {
+                storeProfit.sort()
+            }
+            return storesProfitCopy
+        }
+
+        function sortByMaxStoreProfitDaily(storesProfit) {
+            const storesProfitCopy = JSON.parse(JSON.stringify(storesProfit))
+
+            storesProfitCopy.sort(function (storeProfitA, storeProfitB) {
+                const maxStoreProfitA = Math.max(...storeProfitA)
+                const maxStoreProfitB = Math.max(...storeProfitB)
+
+                if (maxStoreProfitA === maxStoreProfitB) {
+                    return 0
+                } else if (maxStoreProfitA < maxStoreProfitB) {
+                    return 1
+                } else {
+                    return -1
+                }
+            })
+
+            return storesProfitCopy
+        }
+
+        function sortBySumStoreProfit(storesProfit) {
+            const storesProfitCopy = JSON.parse(JSON.stringify(storesProfit))
+
+            storesProfitCopy.sort(function (storeProfitA, storeProfitB) {
+                const sumStoreProfitA = storeProfitA.reduce((accumulator, profit) => accumulator += profit, 0)
+                const sumStoreProfitB = storeProfitB.reduce((accumulator, profit) => accumulator += profit, 0)
+
+                if (sumStoreProfitA === sumStoreProfitB) {
+                    return 0
+                } else if (sumStoreProfitA < sumStoreProfitB) {
+                    return 1
+                } else {
+                    return -1
+                }
+            })
+
+            return storesProfitCopy
+        }
+
+        document.write(
+            `Підзадача 1, результат: ${getEveryStoreProfitWeekly(storesProfit)}<br>
+            Підзадача 2, результат: ${getStoresProfitDaily(storesProfit)}<br>
+            Підзадача 3, результат: ${getStoresProfitAtWorkDays(storesProfit)}<br>
+            Підзадача 4, результат: ${getStoresProfitAtWeekend(storesProfit)}<br>
+            Підзадача 5, результат: ${getStoresMaxProfitAtWednesday(storesProfit)}<br>
+            Підзадача 6, результат: ${getProfitsGreater200(storesProfit)}<br>
+            Підзадача 7, результат: ${sortStoresProfit(storesProfit)}<br>
+            Підзадача 8, результат: ${sortByMaxStoreProfitDaily(storesProfit)}<br>
+            Підзадача 9, результат: ${sortBySumStoreProfit(storesProfit)}`)
+    </script>
+</body>
+
+</html>
