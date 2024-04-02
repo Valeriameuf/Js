@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 5</title>
+</head>
+
+<body>
+    <h1>Задача 5</h1>
+    <p>Дано масив імен. Застосовуючи відповідне сортування та бінарний пошук визначити,
+        чи є у масиві ім’я «Olga» і під яким індексом.</p>
+    <script>
+        let names = [
+            'John',
+            'Paul',
+            'Olga',
+            'Andrew',
+            'Abrams',
+            'Abba',
+            'Peter',
+            'Tina',
+            'Olga',
+            'Jack',
+            'Peter',
+        ]
+        names.sort()
+        function findIndexByBinarySearch(a, searchElement) {
+            let start = 0
+            let end = a.length - 1
+            while (start <= end) {
+                const middle = Math.floor((start + end) / 2)
+                if (a[middle] === searchElement) {
+                    return middle
+                }
+                if (a[middle] < searchElement) {
+                    start = middle + 1
+                }
+                if (a[middle] > searchElement) {
+                    end = middle - 1
+                }
+            }
+            return -1
+        }
+        const result = findIndexByBinarySearch(names, "Olga")
+        document.write(`[${names}]<br>Індекс шукаємого елементу: ${result}`)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 4</title>
+</head>
+
+<body>
+    <h1>Задача 4</h1>
+    <p>Для розглянутих методів сортування спробувати вивести етапи сортування шляхом виведення
+        відповідних таблиць за зразком .</p>
+    <script>
+        function getRandomNumber(minValue, maxValue) {
+            return minValue + Math.floor(Math.random() * (maxValue - minValue + 1))
+        }
+        function generateRandomArray(arrayLength, minValue, maxValue) {
+            const arr = []
+            for (let i = 0; i < arrayLength; i++) {
+                const randNum = getRandomNumber(minValue, maxValue)
+                arr.push(randNum)
+            }
+            return arr
+        }
+        function bubleSort(arr) {
+            let leftIndex = 0
+            let rightIndex = arr.length - 1
+
+            while (leftIndex < rightIndex) {
+                //--- проходимось зліва-направо
+                let changed = false
+                for (let i = leftIndex + 1; i <= rightIndex; i++) {
+                    if (arr[i - 1] > arr[i]) {
+                        let temp = arr[i - 1]
+                        arr[i - 1] = arr[i]
+                        arr[i] = temp
+                        changed = true
+                        document.write(`[${arr}]<br>`)
+                    }
+                }
+                rightIndex--
+                if (changed === false) {
+                    break
+                }
+                //---- проходимось справа-наліво
+                changed = false
+                for (let i = rightIndex; i > leftIndex; i--) {
+                    if (arr[i - 1] > arr[i]) {
+                        let temp = arr[i - 1]
+                        arr[i - 1] = arr[i]
+                        arr[i] = temp
+                        changed = true
+                        document.write(`[${arr}]<br>`)
+                    }
+                }
+                leftIndex++
+                if (changed === false) {
+                    break
+                }
+            }
+        }
+
+        function swap(arr, firstIdx, secondIdx) {
+            let temp = arr[firstIdx]
+            arr[firstIdx] = arr[secondIdx]
+            arr[secondIdx] = temp
+        }
+        function cocktailSort(array) {
+            let leftIndex = 0
+            let rightIndex = array.length - 1
+
+            while (leftIndex < rightIndex) {
+                for (let idx = leftIndex; idx < rightIndex; idx++) {
+                    if (array[idx] > array[idx + 1]) {
+                        swap(array, idx, idx + 1)
+                        document.write(`[${array}]<br>`)
+                    }
+                }
+                rightIndex--
+                for (let idx = rightIndex; idx > leftIndex; idx--) {
+                    if (array[idx] < array[idx - 1]) {
+                        swap(array, idx, idx - 1)
+                        document.write(`[${array}]<br>`)
+                    }
+                }
+                leftIndex++
+            }
+        }
+
+        function insertSort(arr) {
+            for (let k = 1; k < arr.length; k++) {
+                const currentElement = arr[k]
+                let i = k - 1
+                while (i >= 0 && arr[i] > currentElement) {
+                    arr[i + 1] = arr[i]
+                    i = i - 1
+                    document.write(`[${arr}]<br>`)
+                }
+                if (i + 1 !== k) {
+                    arr[i + 1] = currentElement
+                    document.write(`[${arr}]<br>`)
+                }
+            }
+        }
+        const array = generateRandomArray(6, 0, 100)
+        const arrayCopy = JSON.parse(JSON.stringify(array))
+        const arrayCopy2 = JSON.parse(JSON.stringify(array))
+        document.write(`Початковий стан масиву:<br>[${array}]<br><br>`)
+        document.write(`Сортування "бульбашкою":<br>`)
+        bubleSort(array)
+        document.write(`<br>Сортування алгоритмом "коктейль":<br>`)
+        cocktailSort(arrayCopy)
+        document.write(`<br>Сортування алгоритмом "включенням":<br>`)
+        insertSort(arrayCopy2)
+    </script>
+</body>
+
+</html>

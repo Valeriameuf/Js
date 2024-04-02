@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 1</title>
+</head>
+
+<body>
+    <h1>Задача 1</h1>
+    <p>Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів та порівнянь чисел під час
+        сортування бульбашкою</p>
+    <script>
+        function getRandomNumber(minValue, maxValue) {
+            return minValue + Math.floor(Math.random() * (maxValue - minValue + 1))
+        }
+        function generateRandomArray(arrayLength, minValue, maxValue) {
+            const arr = []
+            for (let i = 0; i < arrayLength; i++) {
+                const randNum = getRandomNumber(minValue, maxValue)
+                arr.push(randNum)
+            }
+            return arr
+        }
+        function bubleSort(arr) {
+            let leftIndex = 0
+            let rightIndex = arr.length - 1
+            let comparisons = 0
+            let replaces = 0
+            while (leftIndex < rightIndex) {
+                //--- проходимось зліва-направо
+                let changed = false
+                for (let i = leftIndex + 1; i <= rightIndex; i++) {
+                    if (arr[i - 1] > arr[i]) {
+                        let temp = arr[i - 1]
+                        arr[i - 1] = arr[i]
+                        arr[i] = temp
+                        changed = true
+                        replaces++
+                    }
+                    comparisons++
+                }
+                rightIndex--
+                if (changed === false) {
+                    break
+                }
+                //---- проходимось справа-наліво
+                changed = false
+                for (let i = rightIndex; i > leftIndex; i--) {
+                    if (arr[i - 1] > arr[i]) {
+                        let temp = arr[i - 1]
+                        arr[i - 1] = arr[i]
+                        arr[i] = temp
+                        changed = true
+                        replaces++
+                    }
+                    comparisons++
+                }
+                leftIndex++
+                if (changed === false) {
+                    break
+                }
+            }
+            return [comparisons, replaces]
+        }
+        const array = generateRandomArray(30, 0, 567)
+        const sortInfo = bubleSort(array)
+        document.write(`Число порівнянь: ${sortInfo[0]},число переміщень: ${sortInfo[1]}`)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 2</title>
+</head>
+
+<body>
+    <h1>Задача 2</h1>
+    <p>Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів та порівнянь чисел під час сортування
+        змішуванням.</p>
+    <script>
+        function getRandomNumber(minValue, maxValue) {
+            return minValue + Math.floor(Math.random() * (maxValue - minValue + 1))
+        }
+        function generateRandomArray(arrayLength, minValue, maxValue) {
+            const arr = []
+            for (let i = 0; i < arrayLength; i++) {
+                const randNum = getRandomNumber(minValue, maxValue)
+                arr.push(randNum)
+            }
+            return arr
+        }
+        function swap(arr, firstIdx, secondIdx) {
+            let temp = arr[firstIdx]
+            arr[firstIdx] = arr[secondIdx]
+            arr[secondIdx] = temp
+        }
+        function cocktailSort(array) {
+            let leftIndex = 0
+            let rightIndex = array.length - 1
+            let comparisons = 0
+            let replaces = 0
+
+            while (leftIndex < rightIndex) {
+                for (let idx = leftIndex; idx < rightIndex; idx++) {
+                    if (array[idx] > array[idx + 1]) {
+                        swap(array, idx, idx + 1)
+                        replaces++
+                    }
+                    comparisons++
+                }
+                rightIndex--
+                for (let idx = rightIndex; idx > leftIndex; idx--) {
+                    if (array[idx] < array[idx - 1]) {
+                        swap(array, idx, idx - 1)
+                        replaces++
+                    }
+                    comparisons++
+                }
+                leftIndex++
+            }
+            return [comparisons, replaces]
+        }
+        const array = generateRandomArray(30, 0, 567)
+        const sortInfo = cocktailSort(array)
+        document.write(`Число порівнянь: ${sortInfo[0]},число переміщень: ${sortInfo[1]}`)
+    </script>
+</body>
+
+</html>
