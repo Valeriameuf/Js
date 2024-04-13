@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 2</title>
+</head>
+
+<body>
+    <h1>Задача 2</h1>
+    <p>
+        Створити об’єкт «Авто».
+    </p>
+    <script>
+        const car = {
+            brand: "Volvo",
+            tankSize: 50,
+            litersNumber: 20,
+            seats: 4,
+            passagers: 2,
+            fillTank: function (litres) {
+                const tmp = this.litresNumber + litres
+                if (tmp > this.tankSize) {
+                    this.litersNumber = this.tankSize
+                    return
+                }
+                this.litersNumber = tmp
+            },
+            showPassagers: function () {
+                return document.write(`Кількість пасажирів:${this.passagers}`)
+            },
+            addPassagers: function (passagers) {
+                const tmp = this.passagers + passagers
+                if (tmp > this.seats) {
+                    this.passagers = this.seats
+                    return
+                }
+                this.passagers = tmp
+            },
+            removePassagers: function (passagers) {
+                const tmp = this.passagers - passagers
+                if (tmp < 0) {
+                    this.passagers = 0
+                    return
+                }
+                this.passagers = tmp
+            }
+        }
+    </script>
+</body>
+
+</html>

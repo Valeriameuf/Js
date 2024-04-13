@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 3</title>
+</head>
+
+<body>
+    <h1>Задача 3</h1>
+    <p>Розробити клас MultChecker для перевірки таблиці множення</p>
+    <script>
+        class MultChecker {
+            constructor(checkedNumber) {
+                this.checkedNumber = checkedNumber
+                this.rightAnswers = 0
+                this.wrongAnswers = 0
+            }
+            generateExercise() {
+                const randNumber = Math.floor(Math.random() * (10 - 1)) + 1;
+                const answer = this.checkedNumber * randNumber
+
+                return {
+                    exercise: `${this.checkedNumber} * ${randNumber}`,
+                    answer: answer
+                }
+            }
+            checkUserAnswer(userAnswer, rightAnswer) {
+                if (userAnswer === rightAnswer) {
+                    this.rightAnswers++
+                    return
+                }
+                this.wrongAnswers++
+            }
+            renderResults() {
+                document.write(
+                    `Кількість правильних відповідей: ${this.rightAnswers}<br>
+                    Кількість неправильних відповідей: ${this.wrongAnswers}`
+                )
+            }
+        }
+        const multChecker = new MultChecker(7)
+
+        for (let i = 0; i < 5; i++) {
+            const exercise = multChecker.generateExercise()
+            let userAnswer = prompt(`Виконайте завдання: ${exercise.exercise}`)
+
+            if (userAnswer === null) {
+                break
+            }
+            userAnswer = parseInt(userAnswer)
+            multChecker.checkUserAnswer(userAnswer, exercise.answer)
+        }
+
+        multChecker.renderResults()
+    </script>
+</body>
+
+</html>

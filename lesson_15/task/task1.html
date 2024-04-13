@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 1</title>
+</head>
+
+<body>
+    <h1>Задача 1</h1>
+    <p>
+        Створити об’єкт «Тир». У масиві зберігаються 1, якщо у цьому квадраті є заєць і 0 в іншому
+        випадку
+    </p>
+    <script>
+        const shootingGallery = {
+            gameField: [0, 1, 0, 1, 0, 1, 0],
+            shoot: function (position) {
+                if (this.gameField[position] === 1) {
+                    this.gameField[position] = 0
+                    return true
+                }
+                return false
+            },
+            showGameField: function () {
+                document.write(`[${this.gameField}]<br>`)
+            }
+        }
+        shootingGallery.showGameField()
+        document.write('Робимо постріл по позиції 1<br>')
+        shootingGallery.shoot(1)
+        shootingGallery.showGameField()
+    </script>
+
+</body>
+
+</html>

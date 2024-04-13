@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 5</title>
+</head>
+
+<body>
+    <h1>Задача 5</h1>
+    <p>Розробити клас «Керівник танців»</p>
+    <script>
+        class PairDance {
+            constructor(nameMan, nameWomen) {
+                this.nameMan = nameMan
+                this.nameWomen = nameWomen
+            }
+            getRandManDancer() {
+                const randIndex = Math.floor(Math.random() * ((this.nameMan.length - 1) - 0)) + 0;
+                return this.nameMan[randIndex]
+            }
+            getRandWomenDancer() {
+                const randIndex = Math.floor(Math.random() * ((this.nameWomen.length - 1) - 0)) + 0;
+                return this.nameWomen[randIndex]
+            }
+            showDancePair() {
+                document.write(`${[this.getRandManDancer(), this.getRandWomenDancer()]}<br>`)
+            }
+            run() {
+                setInterval(() => this.showDancePair(), 5000)
+            }
+        }
+        const nameMan = ["Ivan", "Evgen", "Tom"]
+        const nameWomen = ["Olga", "Eva", "Katherina"]
+
+        const pairDance = new PairDance(nameMan, nameWomen)
+        pairDance.run()
+    </script>
+</body>
+
+</html>

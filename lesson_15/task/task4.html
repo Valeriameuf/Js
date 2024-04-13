@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 4</title>
+</head>
+
+<body>
+    <h1>Задача 4</h1>
+    <p>Розробити клас Baner</p>
+    <script>
+        class Baner {
+            constructor(pictures) {
+                this.pictures = pictures
+            }
+            getRandPicture() {
+                const randIndex = Math.floor(Math.random() * ((pictures.length - 1) - 0)) + 0;
+                return this.pictures[randIndex]
+            }
+            showPicture(picture) {
+                document.write(`<a href="${picture.link}"><img src="${picture.path}"></a>`)
+            }
+        }
+        const pictures = [
+            {
+                path: "../img/aloe-vera.png",
+                link: "https://global.typology.com/collections/best-sellers"
+            },
+            {
+                path: "../img/serum-a-la-cafeine.png",
+                link: "https://global.typology.com/collections/best-sellers"
+            },
+            {
+                path: "../img/teint-packshots.png",
+                link: "https://global.typology.com/collections/best-sellers"
+            },
+            {
+                path: "../img/teinte_packshot-collection.png",
+                link: "https://global.typology.com/collections/best-sellers"
+            }
+        ]
+
+        const baner = new Baner(pictures)
+        baner.showPicture(baner.getRandPicture())
+    </script>
+</body>
+
+</html>
