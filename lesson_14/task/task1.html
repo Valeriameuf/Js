@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 1</title>
+</head>
+
+<body>
+    <h1>Задача 1</h1>
+    <p>Описати масив об’єктів – сайтів розроблених компанією з такими властивостями
+        ----- Властивості ------
+        назва компанії на час розробки (назву періодично змінюють)
+        власник компанії
+        споснсори (масив спонсорів)
+        * прізвище спонсора
+        * ім’я спонсора
+        * сума вкладень спонсора
+        рік випуску
+        вартість сайту
+        Знайти:
+
+    </p>
+    <ol>
+        <li>загальну вартість усіх сайтів</li>
+        <li>кількість сайтів, що було зроблено між 2000 та 2009 рр.</li>
+        <li>кількість сайтів, де сума спонсорських вкладень була більшою за 100000</li>
+        <li>створити загальний список усіх спонсорів (поки можуть повторюватись,
+            просто зібрати усі у масив)</li>
+        <li>знайти рік, коли прибуток був найбільшим</li>
+        <li>упорядкувати список за спаданням прибутку</li>
+        <li>створити 2 окремих списки з копіями об’єктів, що містять сайти з
+            вартість до 10000 і більше 10000</li>
+    </ol>
+    <script>
+        const sites = [{
+            title: "Company1",
+            owner: "Owner1",
+            partners: [{
+                firstname: "Olga",
+                lastname: "Ivanova",
+                invest: 105000
+            }, {
+                firstname: "Ivan",
+                lastname: "Ivanov",
+                invest: 1200
+            }, {
+                firstname: "Tom",
+                lastname: "Ivanov",
+                invest: 1500
+            }],
+            year: 2009,
+            cost: 120000
+        },
+        {
+            title: "Company2",
+            owner: "Owner2",
+            partners: [{
+                firstname: "Maria",
+                lastname: "Ivanova",
+                invest: 1000
+            }, {
+                firstname: "Nick",
+                lastname: "Ivanov",
+                invest: 120000
+            }, {
+                firstname: "Oleg",
+                lastname: "Ivanov",
+                invest: 1500
+            }],
+            year: 2017,
+            cost: 150000
+        },
+        {
+            title: "Company3",
+            owner: "Owner3",
+            partners: [{
+                firstname: "Katherina",
+                lastname: "Ivanova",
+                invest: 1000
+            }, {
+                firstname: "Valeria",
+                lastname: "Ivanova",
+                invest: 1200
+            }, {
+                firstname: "Jack",
+                lastname: "Ivanov",
+                invest: 1500
+            }],
+            year: 2006,
+            cost: 5500
+        }
+        ]
+
+        let totalCost = 0
+        for (let i = 0; i < sites.length; i++) {
+            totalCost += sites[i].cost
+        }
+        console.log(totalCost)
+
+        const numberSites = sites.filter((site) => site.year >= 2000 && site.year <= 2009).length
+        console.log(numberSites)
+
+        const expSites = sites.filter((site) => site.partners.reduce((totalInvest, currentPartner) => totalInvest + currentPartner.invest, 0) > 100000)
+        console.log(expSites)
+
+        const partners = sites.reduce((arrPartners, nextSite) => arrPartners.concat(nextSite.partners), [])
+        console.log(partners)
+
+        const maxCostYear = sites.sort((s1, s2) => s2.cost - s1.cost)[0].year
+        console.log(maxCostYear)
+
+        const sitesDesc = sites.sort((s1, s2) => s2.cost - s1.cost)
+        console.log(sitesDesc)
+
+        const sitesLess10000 = sites.filter((site) => site.cost < 10000)
+        console.log(sitesLess10000)
+        const sitesGreater10000 = sites.filter((site) => site.cost > 10000)
+        console.log(sitesGreater10000)
+    </script>
+</body>
+
+</html>

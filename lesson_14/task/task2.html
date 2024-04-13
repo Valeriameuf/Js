@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 2</title>
+</head>
+
+<body>
+    <h1>Задача 2</h1>
+    <p>Розробити функцію, у яку передають об’єкт (день, місяць, рік). Визначити, який буде рік через N місяців.</p>
+    <script>
+        function getResYear({ m, y }, shiftN) {
+            let newMonth = m + shiftN
+            let newYear = y + Math.floor((newMonth - 1) / 12)
+            return newYear
+        }
+        let year = getResYear({ d: 11, m: 5, y: 2024 }, 13)
+        document.write(`Year = ${year}`)
+    </script>
+</body>
+
+</html>
