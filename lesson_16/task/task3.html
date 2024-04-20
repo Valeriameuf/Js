@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 3</title>
+</head>
+
+<body>
+    <h1>Задача 3</h1>
+    <p>Об’єкт “Фірма” (використати члени-класи)</p>
+    <script>
+        class Fondation {
+            constructor(year, month) {
+                this.year = year
+                this.month = month
+            }
+            toString() {
+                return `${this.year}.${this.month}`
+            }
+        }
+
+        class Service {
+            constructor(name, cost, time) {
+                this.name = name
+                this.cost = cost
+                this.time = time
+            }
+            toString() {
+                return `Service "${this.name}", cost: ${this.coast}, time: ${this.time}`
+            }
+        }
+
+        class Adress {
+            constructor(contry, city, street, number) {
+                this.contry = contry
+                this.city = city
+                this.street = street
+                this.number = number
+            }
+            toString() {
+                return `Adress: ${this.contry},${this.city},${this.street},${this.number}`
+            }
+        }
+
+        class Company {
+            constructor(name, fondation, services, adresses) {
+                this.name = name
+                this.fondation = fondation
+                this.services = services
+                this.adresses = adresses
+            }
+            getAge() {
+                const currentDate = new Date();
+                const fondDate = new Date(`${this.fondation.year}.${this.fondation.month}`)
+
+                const diffInMilliseconds = currentDate - fondDate;
+
+                return Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24 * 365.25))
+            }
+            getAdressasByCity(city) {
+                return this.adresses.filter((adress) => adress.city === city)
+            }
+            getAvailableServices(amount, time) {
+                return this.services.filter((service) => service.cost <= amount && service.time <= time)
+            }
+            toString() {
+                return `Фірма: ${this.name}, Дата заснування: ${this.fondation}`
+            }
+        }
+
+        const fondation = new Fondation(1999, 8)
+        const services = [new Service('Regular clean', 1000, 60 * 30), new Service('General clean', 2000, 60 * 60)]
+        const adresses = [new Adress('Ukraine', 'Kyiv', 'StreetA', 1), new Adress('Ukraine', 'Dnepr', 'StreetB', 2)]
+        const company = new Company('Zorja', fondation, services, adresses)
+
+        document.write(`${company}<br>`)
+        document.write(`Пройшло років з заснування: ${company.getAge()}<br>`)
+
+
+    </script>
+</body>
+
+</html>

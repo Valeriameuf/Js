@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 1</title>
+</head>
+
+<body>
+    <h1>Задача 1</h1>
+    <p>Створити клас TDate для роботи із датами у форматі “день.місяць.рік”. Дата представляється
+        структурою із трьома полями.
+        Реалізувати методи збільшення/зменшення дати на певну кількість днів, місяців чи років. Введення
+        та виведення дати реалізувати за допомогою методу toString.</p>
+    <script>
+        class TDate {
+            #day
+            #month
+            #year
+            constructor(day, month, year) {
+                this.Day = day
+                this.Month = month
+                this.Year = year
+            }
+            set Day(day) {
+                if (day < 1 || day > 31) throw new Error('День не є коректним')
+                this.#day = day
+            }
+            set Month(month) {
+                if (month < 1 || month > 12) throw new Error('Місяць не є коректним')
+                this.#month = month
+            }
+            set Year(year) {
+                if (year < 1) throw new Error('Рік не є коректним')
+                this.#year = year
+            }
+            addDay(day) {
+                for (let i = 0; i < day; i++) {
+                    const daysInCurrMonth = this.getDaysInCurrMonth()
+
+                    this.#day++
+
+                    if (this.#day > daysInCurrMonth) {
+                        this.#day = 1
+                        this.#month++
+                    }
+
+                    if (this.#month > 12) {
+                        this.#month = 1
+                        this.#year++
+                    }
+                }
+            }
+            addMonth(month) {
+                this.#month += month
+                const addYear = Math.floor(this.#month / 12)
+                this.#month = this.#month % 12
+                this.#year += addYear
+
+                this.correctDate()
+            }
+            addYear(year) {
+                this.#year += year
+            }
+            subtractDay(day) {
+                for (let i = 0; i < day; i++) {
+                    this.#day--
+
+                    if (this.#day < 1) {
+                        this.#month--
+
+                        if (this.#month < 1) {
+                            this.#month = 12
+                            this.#year--
+                        }
+
+                        const daysInCurrMonth = this.getDaysInCurrMonth()
+                        this.#day = daysInCurrMonth
+                    }
+                }
+            }
+            substractMonth(month) {
+                this.#month -= month % 12
+                const substractYear = Math.floor(month / 12)
+                this.#year -= substractYear
+
+                this.correctDate()
+            }
+            substractYear(year) {
+                this.#year -= year
+            }
+            correctDate() {
+                const daysInCurrMonth = this.getDaysInCurrMonth()
+
+                if (this.#day > daysInCurrMonth) {
+                    const diff = this.#day - daysInCurrMonth
+                    this.#day = daysInCurrMonth
+                    this.addDay(diff)
+                }
+            }
+            getDaysInCurrMonth() {
+                const isLeapYear = this.#year % 4 === 0 && (this.#year % 100 !== 0 || this.#year % 400 === 0);
+                const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+                if (this.#month === 2 && isLeapYear) {
+                    return 29
+                } else {
+                    return daysInMonth[this.#month - 1]
+                }
+            }
+            toString() {
+                return `${this.#day}.${this.#month}.${this.#year}`
+            }
+        }
+        const tdate = new TDate(31, 12, 2023)
+        document.write(`${tdate.toString()}<br>`)
+        tdate.addDay(30)
+        document.write(`${tdate.toString()}<br>`)
+        tdate.addMonth(1)
+        document.write(`${tdate.toString()}<br>`)
+        tdate.addYear(1)
+        document.write(`${tdate.toString()}<br>`)
+        tdate.substractYear(1)
+        document.write(`${tdate.toString()}<br>`)
+        tdate.substractMonth(1)
+        document.write(`${tdate.toString()}<br>`)
+        tdate.subtractDay(30)
+        document.write(`${tdate.toString()}<br>`)
+
+    </script>
+</body>
+
+</html>

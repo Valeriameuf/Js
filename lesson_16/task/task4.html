@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Задача 4</h1>
+    <p>Створити клас TBankomat, який моделює роботу банкомата. Клас повинен містити поля для зберігання
+        кількості купюр кожного
+        із номіналів від 5 до 200 гривень. Реалізувати методи знаходження максимальної та мінімальної
+        сум, які може видати
+        банкомат, та метод зняття деякої суми.</p>
+    <script>
+        class Note {
+            constructor(noteValue, noteNumber) {
+                // noteValue -  номінал, noteNumber - кількість штук купюр
+                this.value = noteValue
+                this.number = noteNumber
+            }
+            get totalValue() {
+                return this.value * this.number
+            }
+            toString() {
+                return `${this.value} : ${this.number}`
+            }
+        }
+        class Bankomat {
+            constructor(notesList) {
+                this.notesList = notesList
+            }
+            get minSum() {
+                let minNote = this.notesList.reduce(
+                    (prevNoteValue, note) =>
+                        note.number > 0 && note.value < prevNoteValue
+                            ? note.value
+                            : prevNoteValue,
+                    Infinity
+                )
+                return isFinite(minNote) ? minNote : 0
+            }
+            get maxSum() {
+                let sum = this.notesList.reduce(
+                    (prevSum, note) => prevSum + note.totalValue,
+                    0
+                )
+                return sum
+            }
+            //----- метод визначення чи можна видати потрібну суму ---
+            getPossibleNotesList(userMoney) {
+                let possibleNotes = []
+                for (let i = 0; i < this.notesList.length && userMoney > 0; i++) {
+                    let note = this.notesList[i]
+                    if (userMoney >= note.value && note.number > 0) {
+                        let notesNum = Math.floor(userMoney / note.value)
+                        let notesToGive = Math.min(notesNum, note.number)
+                        possibleNotes.push({
+                            note,
+                            notesToGive,
+                        })
+                        userMoney -= notesToGive * note.value
+                    }
+                }
+                if (userMoney > 0) return false
+                return possibleNotes
+            }
+            //----- метод зняття деякої суми ---
+            getMoney(userMoney) {
+                if (userMoney > this.maxSum) {
+                    document.write('У банкоматі немає такої суми ')
+                    return
+                }
+                let possibleNotes = this.getPossibleNotesList(userMoney)
+                console.log(possibleNotes)
+                if (possibleNotes) {
+                    for (const { note, notesToGive } of possibleNotes) {
+                        document.write(`${note.value} : ${notesToGive}<br>`)
+                        note.number -= notesToGive
+                    }
+                    document.write('Заберіть Ваші гроші!')
+                } else {
+                    document.write('Не можна видати таку суму бо немає таких купюр ')
+                }
+            }
+        }
+
+        let notesList = [
+            new Note(200, 1),
+            new Note(100, 40),
+            new Note(50, 12),
+            new Note(20, 19),
+            new Note(10, 9),
+            new Note(5, 0),
+        ]
+
+        let bankomat = new Bankomat(notesList)
+        bankomat.getMoney(150)
+    </script>
+</body>
+
+</html>

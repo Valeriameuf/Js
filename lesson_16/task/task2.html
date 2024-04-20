@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Задача 2</h1>
+    <p>
+        Створити клас TMoney для роботи з грошовими сумами.
+        Сума повинна зберігатися у вигляді доларового еквіваленту.
+        Реалізувати методи додавання/вилучення грошової маси, вказуючи необхідну суму
+        у гривнях, та визначення курсу долара, при
+        якому сума у гривнях збільшиться на 100. Курс долара зберігати в окремому полі.
+    </p>
+    <script>
+        class TMoney {
+            constructor() {
+                this.rate = 37.5
+                this.balance = 0
+            }
+            add(amoundUah) {
+                this.balance += amoundUah / this.rate
+            }
+            diff(amoundUah) {
+                this.balance -= amoundUah / this.rate
+            }
+            getRateBringsExtra100Uah() {
+                return (this.balance * this.rate + 100) / this.balance
+            }
+            toString() {
+                return `Rate: ${this.rate}, Balance: ${this.balance}`
+            }
+        }
+    </script>
+</body>
+
+</html>
