@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Задача 3</h1>
+    <p>Створити клас Нагадувач. Кожні вказані кількості секунд (використати setInterval) програма
+        нагадує про якусь подію (це
+        просто текст) і також виводиться порядковий номер скільки раз вже нагадування було. Зробити так,
+        щоб неможна було
+        зробити одночасно декілька об’єктів-нагадувачів. Методи зупинки таймера, метод зміни
+        повідомлення без зупинки таймера.</p>
+
+    <script>
+        class Reminder {
+            static instance
+            #counter = 0
+            #timerId
+            #text
+            constructor(text) {
+                if (this.instance === undefined) {
+                    this.#text = text
+                    Reminder.instance = this
+                }
+                return Reminder.instance
+            }
+            run() {
+                this.#timerId = setInterval(() => document.write(`Attempts: ${++this.#counter},${this.#text}<br>`), 1500)
+            }
+            stopReminder() {
+                clearInterval(this.#timerId)
+                this.#timerId = undefined
+            }
+            changeText(newText) {
+                this.#text = newText
+            }
+        }
+
+        const reminder = new Reminder("Hello World")
+        reminder.run()
+
+        setTimeout(() => {
+            reminder.changeText("bla-bla")
+            setTimeout(() => reminder.stopReminder(), 10000)
+        }, 10000)
+    </script>
+</body>
+
+</html>

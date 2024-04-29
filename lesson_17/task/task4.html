@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Задача 4</h1>
+    <p>Склад. База товарів, які зберігаються на складі: назва товару, одиниця виміру, кількість, фірма
+        виробник (назва,
+        реєстраційний номер). Організувати реєстрацію/відвантаження товарів, фільтрація за назвою
+        товару, фільтрація за назвою
+        фірми</p>
+    <script>
+        class Product {
+            #quantity
+            constructor(name, measure, quantity, producer) {
+                this.name = name
+                this.measure = measure
+                this.Quantity = quantity
+                this.producer = producer
+            }
+            set Quantity(quantity) {
+                if (quantity < 1) {
+                    throw new Error('Кількість не може бути менша одного')
+                }
+                this.#quantity = quantity
+            }
+            get Quantity() {
+                return this.#quantity
+            }
+            toString() {
+                return `${this.name},${this.measure},${this.#quantity},${this.producer}`
+            }
+        }
+        class Producer {
+            constructor(name, registerNumber) {
+                this.name = name
+                this.registerNumber = registerNumber
+            }
+            toString() {
+                return `${this.name},${this.registerNumber}`
+            }
+        }
+        class Storage {
+            constructor() {
+                this.products = []
+            }
+            filterProductByName(name) {
+                return this.products.filter((product) => product.name === name)
+            }
+            filterProductByCompany(name) {
+                return this.products.filter((product) => product.producer.name === name)
+            }
+
+            registerProduct(name, measure, quantity, producer) {
+                let productFound = false
+
+                for (const product of this.products) {
+                    if (product.name === name) {
+                        product.Quantity += quantity
+                        productFound = true
+                        break
+                    }
+                }
+
+                if (productFound === false) {
+                    this.products.push(
+                        new Product(
+                            name,
+                            measure,
+                            quantity,
+                            producer
+                        )
+                    )
+                }
+            }
+
+            shipment(name, quantity) {
+                const result = []
+
+                for (let i = 0; i < this.products.length; i++) {
+                    const product = this.products[i]
+
+                    if (product.name === name) {
+                        if (quantity > product.Quantity) {
+                            throw new Error('Данної кількості немає в наявності')
+                        }
+                        if (quantity < product.Quantity) {
+                            product.Quantity -= quantity
+                            result.push(
+                                new Product(
+                                    product.name,
+                                    product.measure,
+                                    quantity,
+                                    product.producer
+                                )
+                            )
+                            break
+                        }
+                        result.push(product)
+                        this.products[i] = undefined
+                        break
+                    }
+                }
+
+                if (result.length < 1) {
+                    throw new Error('Товар не знайдено')
+                }
+
+                return result
+            }
+        }
+        const producers = [new Producer("Coca-cola", 2345), new Producer("Obolon", 2456)]
+        const products = [
+            new Product('soda', 'litres', 15, producers[0]),
+            new Product('cola', 'litres', 15, producers[0]),
+            new Product('beer', 'litres', 20, producers[1])
+        ]
+
+        const storage = new Storage()
+
+        for (const product of products) {
+            storage.registerProduct(
+                product.name,
+                product.measure,
+                product.Quantity,
+                product.producer
+            )
+        }
+
+        storage.products.forEach((product) => document.write(`${product}<br>`))
+
+        document.write(`<br>Вивантажено: ${storage.shipment('soda', 5)}<br>`)
+
+        document.write(`<br>Товару залишилось на складі після вивантаження: ${storage.filterProductByName('soda')}`)
+    </script>
+</body>
+
+</html>

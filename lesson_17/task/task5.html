@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 5</title>
+</head>
+
+<body>
+    <h1>Задача 5</h1>
+    <p>Особиста бібліотека. Картотека домашньої бібліотеки: дані книги (автори (піб, рік народження, короткий опис),
+        назва
+        книги, жанр, видавництво (назва, реєстраційний номер, рік засування)). Реалізувати розділи бібліотеки
+        (спеціальна
+        література, хобі, домашнє господарство і т.д.), походження книги і наявність на даний час. Організувати
+        додавання/вилучення книг та вибір книг за назвою, за ПІБ автора, за видавництвом.</p>
+    <script>
+        class Author {
+            constructor(fullname, birthYear, description) {
+                this.fullname = fullname
+                this.birthYear = birthYear
+                this.description = description
+            }
+            toString() {
+                return `${this.fullname},${this.birthYear},${this.description}`
+            }
+        }
+        class Publisher {
+            constructor(name, registerNumber, fondYear) {
+                this.name = name
+                this.registerNumber = registerNumber
+                this.fondYear = fondYear
+            }
+            toString() {
+                return `${this.name},${this.registerNumber},${this.fondYear}`
+            }
+        }
+        class Book {
+            constructor(authors, name, genre, publisher) {
+                this.authors = authors
+                this.name = name
+                this.genre = genre
+                this.publisher = publisher
+            }
+            toString() {
+                return `[${this.authors}],${this.name},${this.genre},${this.publisher}`
+            }
+        }
+        class PersonalLibrary {
+            constructor() {
+                this.sections = {
+                    specialLiterature: [],
+                    hobby: [],
+                    housekeeping: [],
+                    other: []
+                }
+                this.booksMeta = []
+
+            }
+
+            // origin - 1 is bought
+            // origin - 2 is given
+            addBook(book, origin, section) {
+                if (this.sections[section] === undefined) {
+                    throw new Error('Такої секції не існує')
+                }
+
+                const newSectionIndex = this.sections[section].push(book) - 1
+
+                const seekBookMeta = this.booksMeta.find(bookMeta => bookMeta.book.name === book.name)
+
+                if (seekBookMeta === undefined) {
+                    this.booksMeta.push({
+                        book: book,
+                        section: section,
+                        sectionIndex: newSectionIndex,
+                        origin: origin,
+                        available: true
+                    })
+
+                    return
+                }
+
+                seekBookMeta.genreIndex = newSectionIndex
+                seekBookMeta.available = true
+            }
+
+            removeBook(bookName) {
+                const seekBookMeta = this.booksMeta.find(bookMeta => bookMeta.book.name === bookName)
+
+                if (seekBookMeta === undefined) {
+                    throw new Error('Книга не знайдена')
+                }
+
+                seekBookMeta.available = false
+
+                this.sections[seekBookMeta.section][seekBookMeta.sectionIndex] = undefined
+            }
+
+            findBookByName(name) {
+                const seekBookMeta = this.booksMeta.find(bookMeta => bookMeta.book.name === name && bookMeta.available)
+
+                if (seekBookMeta === undefined) {
+                    throw new Error('Книга не знайдена')
+                }
+
+                return seekBookMeta.book
+            }
+            findBooksByAuthorFullname(fullname) {
+                const seekBooksMeta = this.booksMeta.filter(bookMeta => bookMeta.available && bookMeta.book.authors.find(author => author.fullname === fullname))
+
+                return seekBooksMeta.map(bookMeta => bookMeta.book)
+            }
+            findBooksByPublisher(name) {
+                const seekBooksMeta = this.booksMeta.filter(bookMeta => bookMeta.available && bookMeta.book.publisher.name === name)
+
+                return seekBooksMeta.map(bookMeta => bookMeta.book)
+            }
+        }
+
+        const publisher1 = new Publisher('Zorja', 3456, 2020)
+        const publisher2 = new Publisher('Zorja2', 3256, 2022)
+        const authors1 = [new Author('Ivan Ivanov', 1999, 'bla-bla'), new Author('Ivan Petrov', 1999, 'bla-bla')]
+        const authors2 = [new Author('Petro Petrov', 2000, 'bla-bla'), new Author('Tom Petrov', 2000, 'bla-bla')]
+        const book1 = new Book(authors1, 'Game', 'fiction', publisher1)
+        const book2 = new Book(authors2, 'Game2', 'fiction', publisher2)
+
+        const library = new PersonalLibrary()
+        library.addBook(book1, 'bought', 'other')
+        library.addBook(book2, 'given', 'specialLiterature')
+
+        document.write(`${library.findBookByName('Game')}<br>`)
+        document.write(`${library.findBooksByPublisher('Zorja')}<br>`)
+        document.write(`${library.findBooksByAuthorFullname('Tom Petrov')}<br>`)
+        library.removeBook('Game')
+        document.write(`${library.findBookByName('Game')}<br>`)
+
+    </script>
+</body>
+
+</html>

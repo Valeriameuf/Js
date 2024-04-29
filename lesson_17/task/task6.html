@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Задача 6</h1>
+    <p>Дано два класи MultChecker (клас для перевірки таблиці множення - рандомно генеруються числа, які треба
+        перемножати),
+        AddChecker (клас для перевірки додавання - рандомно генеруються числа у заданому діапазоні, які треба додавати).
+        Обидва
+        класи надсилають результати тестування об'єкту класу Hystory, який зберігає історію тестування у масиві у
+        вигляді
+        об'єктів</p>
+    <p>Приклад.
+        testsList= [
+        {firstNum:1, secondNum:5,opration:’*’, userAnswer:7, correctAnswer:5},
+        {firstNum:3, secondNum:4,opration:’+’, userAnswer:7, correctAnswer:7},
+        ]</p>
+    <p>Можна створити окремий клас TestData, який описує один такий тест і у якому будуть ці поля.
+        Розробити клас TestManager, який використовуючи ці класи за допомогою таймера періодично генерує якісь N задач
+        (рандомно
+        вибираємо, що опитувати: додавання чи множення) і проводить опитування. Результати тестування додаються в об’єкт
+        History. Зробити так, щоб об'єкт такого класу можна було створити тільки один. Коли зроблено ці N задач вивести
+        усю
+        історію на екран.</p>
+    <script>
+        class MultChecker {
+            constructor(min, max, history) {
+                this.min = min
+                this.max = max
+                this.history = history
+            }
+            generateTestData() {
+                const firstNum = getRandNum(this.min, this.max)
+                const secondNum = getRandNum(this.min, this.max)
+                const correctAnswer = firstNum * secondNum
+
+                return new TestData(firstNum, secondNum, '*', undefined, correctAnswer)
+            }
+            checkTest(testData) {
+                let userAnswer = prompt(`Виконайте завдання: "${testData.firstNum} ${testData.operation} ${testData.secondNum}"`)
+
+                if (userAnswer === null) {
+                    return
+                }
+
+                userAnswer = parseInt(userAnswer)
+
+                testData.userAnswer = userAnswer
+                this.history.addTest(testData)
+            }
+        }
+
+        class AddChecker {
+            constructor(min, max, history) {
+                this.min = min
+                this.max = max
+                this.history = history
+            }
+            generateTestData() {
+                const firstNum = getRandNum(this.min, this.max)
+                const secondNum = getRandNum(this.min, this.max)
+                const correctAnswer = firstNum + secondNum
+
+                return new TestData(firstNum, secondNum, '+', undefined, correctAnswer)
+            }
+            checkTest(testData) {
+                let userAnswer = prompt(`Виконайте завдання: "${testData.firstNum} ${testData.operation} ${testData.secondNum}"`)
+
+                if (userAnswer === null) {
+                    return
+                }
+
+                userAnswer = parseInt(userAnswer)
+
+                testData.userAnswer = userAnswer
+                this.history.addTest(testData)
+            }
+        }
+
+        class History {
+            constructor() {
+                this.testsList = []
+            }
+            addTest(test) {
+                this.testsList.push(test)
+            }
+            print() {
+                let result = ''
+
+                this.testsList.forEach(test => {
+                    result += `${test}<br><br>`
+                })
+
+                document.write(result)
+            }
+        }
+
+        class TestData {
+            constructor(firstNum, secondNum, operation, userAnswer, correctAnswer) {
+                this.firstNum = firstNum
+                this.secondNum = secondNum
+                this.operation = operation
+                this.userAnswer = userAnswer
+                this.correctAnswer = correctAnswer
+            }
+            toString() {
+                return JSON.stringify(this)
+            }
+        }
+
+        class TestManager {
+            #instance
+            constructor(history, maxTests) {
+                if (this.Instance === undefined) {
+                    this.multChecker = new MultChecker(1, 10, history)
+                    this.addChecker = new AddChecker(1, 100, history)
+                    this.history = history
+                    this.testsCounter = 0
+                    this.maxTests = maxTests
+                    this.testingActive = false
+
+                    this.Instance = this
+                }
+                return this.Instance
+            }
+
+            set Instance(instance) {
+                this.#instance = instance
+            }
+            get Instance() {
+                return this.#instance
+            }
+
+            run() {
+                this.doRun()
+
+                setInterval(this.doRun.bind(this), 8000)
+            }
+
+            doRun() {
+                if (this.testingActive) {
+                    return
+                }
+
+                this.testingActive = true
+
+                const randNum = getRandNum(0, 1)
+                let currChecker
+
+                if (randNum === 0) {
+                    currChecker = this.multChecker
+                } else {
+                    currChecker = this.addChecker
+                }
+
+                for (let i = 0; i < this.maxTests; i++) {
+                    const testData = currChecker.generateTestData()
+                    currChecker.checkTest(testData)
+                }
+                this.testingActive = false
+                history.print()
+            }
+
+        }
+
+        function getRandNum(min, max) {
+            return min + Math.floor(Math.random() * (max - min + 1))
+        }
+
+        const history = new History()
+        const testManager = new TestManager(history, 3)
+
+        testManager.run()
+
+    </script>
+</body>
+
+</html>
