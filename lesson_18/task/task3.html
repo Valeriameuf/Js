@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 3</title>
+</head>
+
+<body>
+    <h1>Задча 3</h1>
+    <p>Користувач задає рік народження. Визначити кількість років користувача.</p>
+    <form>
+        <div>
+            <label for="dob">Введіть свою дату народження</label>
+            <input type="date" id="dob" name="dob" value="" required>
+        </div>
+        <div>
+            <button type="button" onclick="getYearsOld()">Розрахувати</button>
+        </div>
+        <hr>
+        <div>
+            <label for="years-old">Кількість років</label>
+            <input type="number" id="years-old" name="years_old" value="">
+        </div>
+    </form>
+    <script>
+        function getYearsOld() {
+            const dateStr = document.querySelector('#dob').value;
+
+            if (dateStr === '') {
+                alert('Введіть коректну дату народження')
+                return
+            }
+
+            const diff = Math.floor((new Date() - new Date(dateStr)) / 31536000000)
+
+            document.querySelector('#years-old').value = diff;
+        }
+    </script>
+</body>
+
+</html>

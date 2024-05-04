@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 7</title>
+</head>
+
+<body>
+    <h1>Задача 7</h1>
+    <p>Подорож складається з 3 етапів. На кожному етапі користувач може вибрати
+        один з видів транспорту (авто, автобус,
+        літак -
+        випадаючий список), харчування (сніданок, обід, вечеря – checkbоx)
+        та одного з 3-х гідів(використати - radio
+        buttons).
+        Ціни визначте самі. Підрахувати загальну вартість.</p>
+    <form id="travel-form">
+        <div class="trip__transport">
+            <label for="transport">Оберіть транспорт</label>
+            <select name="transport" id="transport">
+                <option value="car" data-price="1500">Car</option>
+                <option value="bus" data-price="1800">Bus</option>
+                <option value="airplane" data-price="2500">Airplane</option>
+            </select>
+        </div>
+        <div class="meal">
+            <span>Оберіть харчування</span>
+            <input name="eat[breakfest]" type="checkbox" value="breakfest" data-price="450" checked>
+            <label for="breakfest">Breakfest</label>
+            <input name="eat[lunch]" type="checkbox" value="lunch" data-price="500" checked>
+            <label for="lunch">Lunch</label>
+            <input name="eat[dinner]" type="checkbox" value="dinner" data-price="450" checked>
+            <label for="dinner">Dinner</label>
+        </div>
+        <div class="guide">
+            <span>Оберіть гіда</span>
+            <input name="guide" type="radio" value="guide1" data-price="550" checked>
+            <label for="guide1">Гід 1</label>
+            <input name="guide" type="radio" value="guide2" data-price="600" checked>
+            <label for="guide2">Гід 2</label>
+            <input name="guide" type="radio" value="guide3" data-price="650" checked>
+            <label for="guide3">Гід 3</label>
+        </div>
+        <button type="submit" id="total_cost">Загальна вартість</button>
+    </form>
+    <div id="cost">
+        Total: <span></span>
+    </div>
+    <script>
+        function calcCost(form) {
+            let fields = []
+            const transportField = form.querySelector('[name="transport"]')
+            // let price = parseFloat(transportField.querySelector('option:checked').dataset.price)
+            fields.push(transportField.querySelector('option:checked'))
+
+            const guideField = form.querySelector('[name="guide"]:checked')
+            // price += parseFloat(guideField.dataset.price)
+            fields.push(guideField)
+
+            const eatFields = form.querySelectorAll('[name^="eat["]')
+            eatFields.forEach(field => {
+                if (field.checked) {
+                    fields.push(field);
+                }
+            });
+
+            console.log(fields)
+            let price = 0
+            fields.forEach(field => {
+                price += parseFloat(field.dataset.price)
+            });
+
+            document.querySelector("#cost span").innerText = price
+        }
+        const form = document.getElementById('travel-form')
+
+        calcCost(form)
+
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            calcCost(form)
+        })
+    </script>
+</body>
+
+</html>

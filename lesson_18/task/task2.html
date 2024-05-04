@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 2</title>
+</head>
+
+<body>
+    <h1>Задача 2</h1>
+    <p>Зробити конвертер валют (курси валют – константи у скрипті)</p>
+    <form>
+        <div>
+            <label for="sum-uah">Сума у гривнях</label>
+            <input type="number" id="sum-uah" name="sum_uah" value="" required>
+        </div>
+        <div>
+            <button onclick="calc()" type="button">Конвертувати</button>
+        </div>
+        <hr>
+        <div style="margin-bottom: 20px;">
+            <label for="sum-euro">Сума у євро</label>
+            <input type="number" id="sum-euro" name="sum_euro" value="" required>
+        </div>
+        <div>
+            <label for="sum-usd">Сума у доларах</label>
+            <input type="number" id="sum-usd" name="sum_usd" value="">
+        </div>
+    </form>
+    <script>
+        function calc() {
+            const USD = 39
+            const EUR = 42
+
+            const sum = parseInt(document.getElementById('sum-uah').value)
+
+            if (sum < 1) {
+                alert("Сума не повинна бути менше 1 гривні")
+                return
+            }
+
+            document.getElementById('sum-usd').value = (sum / USD).toFixed(2)
+            document.getElementById('sum-euro').value = (sum / EUR).toFixed(2)
+        }
+    </script>
+</body>
+
+</html>

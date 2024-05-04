@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 1</title>
+</head>
+
+<body>
+    <h1>Задача 1</h1>
+    <p>Розробити калькулятор</p>
+    <form>
+        <div style="margin-bottom: 20px;">
+            <label for="first-number">First Number</label>
+            <input type="number" id="first-number" name="first_number" value="" required>
+        </div>
+        <div style="margin-bottom: 20px;">
+            <label for="second-number">Second Number</label>
+            <input type="number" id="second-number" name="second_number" value="" required>
+        </div>
+        <div>
+            <button onclick="getSum()" type="button">Додати</button>
+            <button onclick="getDiff()" type="button">Відняти</button>
+            <button onclick="getMultiplication()" type="button">Помножити</button>
+            <button onclick="getDivide()" type="button">Поділити</button>
+        </div>
+        <hr>
+        <div>
+            <label for="second-number">Result</label>
+            <input type="number" id="result" name="result" value="">
+        </div>
+    </form>
+    <script>
+        function getSum() {
+            const firstNum = parseInt(document.getElementById('first-number').value)
+            const secondNum = parseInt(document.getElementById('second-number').value)
+            const res = firstNum + secondNum
+
+            writeResult(res)
+        }
+        function getDiff() {
+            const firstNum = parseInt(document.getElementById('first-number').value)
+            const secondNum = parseInt(document.getElementById('second-number').value)
+            const res = firstNum - secondNum
+
+            writeResult(res)
+        }
+        function getMultiplication() {
+            const firstNum = parseInt(document.getElementById('first-number').value)
+            const secondNum = parseInt(document.getElementById('second-number').value)
+            const res = firstNum * secondNum
+
+            writeResult(res)
+        }
+        function getDivide() {
+            const firstNum = parseInt(document.getElementById('first-number').value)
+            const secondNum = parseInt(document.getElementById('second-number').value)
+            const res = firstNum / secondNum
+
+            writeResult(res)
+        }
+        function writeResult(number) {
+            document.getElementById('result').value = number
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 6</title>
+</head>
+
+<body>
+    <h1>Задача 6</h1>
+    <p>Користувач задає кількість оцінок і натискає на кнопку «get table».
+        В результаті формується
+        таблиця з input, куди
+        користувач вводить оцінки. Після цього натискає на кнопку “get sum” і
+        знаходить середнє
+        значення.</p>
+    <form id="estimate_numbers_form">
+        <label for="">Введіть кількість оцінок</label>
+        <input type="number" name="estimate_number" required>
+        <input type="submit">
+    </form>
+    <div>
+        <form id="estimates_table">
+            <div class="table"></div>
+            <div><button type="submit"></button></div>
+        </form>
+    </div>
+    <div id="avg">
+        AVG: <span>0</span>
+    </div>
+    <script>
+        function tableGenerate(numberRows) {
+            const table = document.createElement('table')
+            for (let i = 0; i < numberRows; i++) {
+                const tr = document.createElement('tr')
+                tr.innerHTML = `<td><input type="number" placeholder="Enter estimate ${i + 1}"></td>`
+                table.append(tr)
+            }
+            document.querySelector("#estimates_table .table").innerHTML = ''
+            document.querySelector("#estimates_table .table").append(table)
+        }
+        document.getElementById('estimate_numbers_form').addEventListener('submit', e => {
+            e.preventDefault()
+            const estimateNumber = e.target.querySelector('[name="estimate_number"]').value
+            tableGenerate(estimateNumber)
+        })
+        document.getElementById('estimates_table').addEventListener('submit', e => {
+            e.preventDefault()
+            const estimateFields = e.target.querySelectorAll("input")
+            const sum = Array.from(estimateFields).reduce((a, b) => a + parseInt(b.value), 0)
+            console.log(sum, estimateFields, estimateFields.length)
+            document.querySelector("#avg span").innerText = (sum / estimateFields.length) || 0
+        })
+    </script>
+</body>
+
+</html>
