@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 4</title>
+    <style>
+        table:not(:last-of-type) {
+            margin-bottom: 20px;
+        }
+
+        td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <p>Дано 3 таблиці розмірності 3*3 з випадковими числами. Якщо відбувається клік на якійсь із
+        клітинок, то до відповідної
+        таблиці додається червона рамка (спробуйте додати можливість відображення кількості кліків біля
+        назви таблиці з
+        використанням відповідно доданого для цього атрибута).</p>
+    <script>
+        function getRandNum(min, max) {
+            return min + Math.floor(Math.random() * (max - min + 1))
+        }
+        function createTable() {
+            const table = document.createElement('table');
+            table.dataset.clicks = '0';
+            table.setAttribute('tabindex', '0');
+
+            for (let i = 0; i < 3; i++) {
+                const row = document.createElement('tr');
+                for (let k = 0; k < 3; k++) {
+                    const cell = document.createElement('td');
+                    cell.innerText = getRandNum(1, 100)
+                    row.append(cell)
+                }
+                table.append(row)
+            }
+            return table
+        }
+        function handleClick(event) {
+            const table = event.target.closest('table')
+            table.dataset.clicks++
+            table.style.border = '1px solid red'
+
+            table.previousElementSibling.innerText = `Кліків зроблено: ${table.dataset.clicks}`
+        }
+        function handleBlur(event) {
+            const table = event.target.closest('table')
+            table.style.border = '1px solid black'
+        }
+        for (let i = 0; i < 3; i++) {
+            const table = createTable()
+            document.body.append(table)
+
+            const h3 = document.createElement('h3')
+            h3.innerText = `Кліків зроблено: ${table.dataset.clicks}`
+
+            table.before(h3)
+            table.addEventListener('click', handleClick)
+            table.addEventListener('blur', handleBlur)
+        }
+    </script>
+</body>
+
+</html>

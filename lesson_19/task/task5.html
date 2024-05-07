@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 5</title>
+    <style>
+        .list {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 15px;
+            margin-left: -15px;
+            margin-right: -15px;
+        }
+
+        .list__card {
+            flex: 0 0 24%;
+            margin-bottom: 15px;
+        }
+
+        .card__area {
+            min-height: 100%;
+            margin-left: 15px;
+            margin-right: 15px;
+            font-family: "Cormorant Infant";
+            font-size: 24px;
+            line-height: 1.4;
+            color: #fff;
+        }
+
+        .card__body {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            color: black;
+            text-align: center;
+        }
+
+        .card__img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            aspect-ratio: 271 / 270;
+            object-fit: contain;
+            border-radius: 10px;
+            margin-bottom: 17px;
+        }
+
+        .list__card--border {
+            border: 2px solid green;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Задача 5</h1>
+    <p>Відображаємо картки товарів, які користувач може вибирати. Вибраний товар має зелену рамку (при
+        кліку робити toogle з
+        класом вибраного елемента)</p>
+    <div class="list">
+        <div class="list__card card" tabindex="0">
+            <div class="card__area">
+                <div class="card__prew">
+                    <img class="card__img" src="img/img1.png" alt="cream">
+                </div>
+                <div class="card__body">
+                    <p>&#36; 144</p>
+                </div>
+            </div>
+        </div>
+        <div class="list__card card" tabindex="0">
+            <div class="card__area">
+                <div class="card__prew">
+                    <img class="card__img" src="img/img2.png" alt="cream">
+                </div>
+                <div class="card__body">
+                    <p>&#36; 144</p>
+                </div>
+            </div>
+        </div>
+        <div class="list__card card" tabindex="0">
+            <div class="card__area">
+                <div class="card__prew">
+                    <img class="card__img" src="img/img3.png" alt="cream">
+                </div>
+                <div class="card__body">
+                    <p>&#36; 144</p>
+                </div>
+            </div>
+        </div>
+        <div class="list__card card" tabindex="0">
+            <div class="card__area">
+                <div class="card__prew">
+                    <img class="card__img" src="img/img4.png" alt="cream">
+                </div>
+                <div class="card__body">
+                    <p>&#36; 144</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const cardList = document.querySelectorAll('.card')
+        cardList.forEach(el => {
+            el.addEventListener('focus', () => toggle(el))
+            el.addEventListener('blur', () => toggle(el))
+        })
+        function toggle(elem) {
+            elem.classList.toggle('list__card--border')
+        }
+    </script>
+</body>
+
+</html>

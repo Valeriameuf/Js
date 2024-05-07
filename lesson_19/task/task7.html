@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .snowflake {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-repeat: no-repeat;
+        }
+
+        .wrapper {
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+            background: url("./img/background.jpeg") no-repeat;
+            background-size: cover;
+            background-position: right center;
+            background-attachment: fixed;
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <h1>Задача 7</h1>
+    <p>Відобразити падаючий сніг. Сніжинка з’являється у верхній частині екрану (top =0) і з випадковою
+        швидкістю рухається
+        вниз (у setInterval викликати метод, у якому додавати крок до top). Як тільки сніжинка досягає
+        нижньої частини екрану
+        (top>maxTop) вона знову повинна з’явитись у верхній частині екрану (top=0).</p> -->
+    <!-- <div class="wrapper" id="wrapper"></div> -->
+
+    <div id="wrapper" class="wrapper"></div>
+    <script>
+        class Snowflake {
+            constructor(imgUrl, width, height, posTop, posLeft, speed) {
+                this.imgUrl = imgUrl
+                this.width = width
+                this.height = height
+                this.posTop = posTop
+                this.posLeft = posLeft
+                this.speed = speed
+                this.snowflakeElement = this.createImg()
+
+                document.getElementById('wrapper').append(this.snowflakeElement)
+            }
+            createImg() {
+                const img = document.createElement('img')
+                img.setAttribute('src', this.imgUrl)
+                img.setAttribute('width', this.width)
+                img.setAttribute('height', this.height)
+                img.style.top = `${this.posTop}px`
+                img.style.left = `${this.posLeft}px`
+                img.style.position = 'absolute'
+
+                return img
+            }
+            updatePosition() {
+                this.posTop += this.speed
+
+                if (this.posTop > window.innerHeight) {
+                    this.posTop = 0
+                }
+
+                this.snowflakeElement.style.top = this.posTop + 'px'
+            }
+        }
+        class SnowflakeFactory {
+            create() {
+                return new Snowflake(
+                    this.getRandImgUrl(),
+                    50,
+                    50,
+                    0,
+                    this.getRandPosLeft(),
+                    this.getRandSpeed()
+                )
+            }
+            getRandImgUrl() {
+                const randNumber = Math.floor(Math.random() * 2)
+                if (randNumber === 0) {
+                    return 'img/image1.png'
+                }
+                return 'img/image2.png'
+            }
+            getRandPosLeft() {
+                return Math.floor(Math.random() * (window.innerWidth - 49))
+            }
+            getRandSpeed() {
+                return Math.floor(1 + Math.random() * 5)
+            }
+        }
+        const snowflakeList = []
+        for (let i = 0; i < 100; i++) {
+            snowflakeList.push((new SnowflakeFactory()).create())
+        }
+
+        const timer = setInterval(() => {
+            for (const snowflake of snowflakeList) {
+                snowflake.updatePosition()
+            }
+        }, 16)
+
+    </script>
+</body>
+
+<script>
+
+</script>
+
+</html>

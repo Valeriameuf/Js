@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 2</title>
+</head>
+
+<body>
+    <h1>Задача 2</h1>
+    <p>Дано 5 елементів input. При введенні значення у якийсь із них необхідно автоматично заповнювати
+        інші (усі попередні у
+        спадному порядку(кожен попередній має значення на 1 менше за наступний), усі наступні на 1
+        більше (кожен наступне на 1
+        більше за попереднього)</p>
+    <form>
+        <div style="margin-bottom: 20px;">
+            <input type="number">
+        </div>
+        <div style="margin-bottom: 20px;">
+            <input type="number">
+        </div>
+        <div style="margin-bottom: 20px;">
+            <input type="number">
+        </div>
+        <div style="margin-bottom: 20px;">
+            <input type="number">
+        </div>
+        <div>
+            <input type="number">
+        </div>
+    </form>
+    <script>
+        function fillInputs(event) {
+            const array = Array.from(document.querySelectorAll('input[type="number"]'))
+
+            array.forEach(el => {
+                if (el !== event.target) {
+                    el.value = ''
+                }
+            })
+
+            const seekIndex = array.indexOf(event.target)
+
+            let decreasedValue = event.target.value
+
+            for (let i = seekIndex - 1; i >= 0; i--) {
+                array[i].value = --decreasedValue
+            }
+
+            let increasedValue = event.target.value
+
+            for (let i = seekIndex + 1; i < array.length; i++) {
+                array[i].value = ++increasedValue
+            }
+        }
+
+        document.querySelectorAll('input[type="number"]').forEach(el => {
+            el.addEventListener('change', fillInputs)
+        })
+    </script>
+</body>
+
+</html>

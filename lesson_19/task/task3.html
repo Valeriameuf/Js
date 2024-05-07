@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 3</title>
+</head>
+
+<body>
+    <h1>Задача 3</h1>
+    <p>Дано 5 випадковим чином згенерованих нумерованих списків з рандомними числами (кількість
+        елементів у списку випадкова
+        від 1 до 10, елементи випадкові – від 1 до 100). При натисненні на кнопку нумеровані списки з
+        парною кількістю елементів
+        зафарбувати у зелений колір, інші у червоний.</p>
+    <script>
+        function getRandNum(min, max) {
+            return min + Math.floor(Math.random() * (max - min + 1))
+        }
+
+        const lists = []
+
+        for (let i = 0; i < 5; i++) {
+            lists.push([])
+
+            const listLength = getRandNum(1, 10)
+
+            for (let k = 0; k < listLength; k++) {
+                lists[i].push(getRandNum(1, 100))
+            }
+        }
+
+        for (const list of lists) {
+            const olEl = document.createElement('ol')
+            document.body.append(olEl)
+            for (const number of list) {
+                const liEl = document.createElement('li')
+                liEl.innerText = number
+                olEl.append(liEl)
+            }
+        }
+
+        const btnEl = document.createElement('button')
+        btnEl.innerHTML = 'Зафарбувати парні списки'
+        document.body.append(btnEl)
+
+        btnEl.addEventListener('click', event => {
+            document.querySelectorAll('ol').forEach((el, index) => {
+                if (el.children.length % 2 === 0) {
+                    el.style.backgroundColor = 'green'
+                } else {
+                    el.style.backgroundColor = 'red'
+                }
+            })
+        })
+
+
+    </script>
+
+</body>
+
+</html>

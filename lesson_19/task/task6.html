@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/fontawesome.css" rel="stylesheet" />
+    <link href="css/brands.css" rel="stylesheet" />
+    <link href="css/solid.css" rel="stylesheet" />
+    <title>Задача 6</title>
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .lists-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .list-item {
+            flex: 1;
+            margin: 0 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .list__icon {
+            font-size: 24px;
+        }
+
+        .list__icon--color-general-list {
+            color: green;
+        }
+
+        .list__icon--color-competition-list {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Задача 6</h1>
+    <p>Дано список спортсменів. Потрібно сформувати список тих, які будуть брати участь у змаганні. При цьому є два
+        стовпці. В
+        одному відображені всі спортсмени, в іншому – список тих, хто був вибраний. При натисканні на зелену стрілку
+        спортсмен
+        переміщається у список для змагань. При натисканні на червону стрілку спортсмен переміщається у загальний
+        список.</p>
+    <div class="container">
+        <h2>Список спортсменів</h2>
+        <div class="lists-container">
+            <div class="list-item">
+                <h3>Загальний список</h3>
+                <ul id="general-list"></ul>
+            </div>
+            <div class="list-item">
+                <h3>Список для змагань</h3>
+                <ul id="competition-list"></ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        const athletesAll = ['John Doe', 'Jane Smith', 'Michael Johnson', 'Emily Davis', 'David Williams'];
+        const selectedAthletes = [];
+
+        const generalList = document.getElementById('general-list');
+        const competitionList = document.getElementById('competition-list');
+
+        for (const athlete of athletesAll) {
+            const liEl = createGeneralListItem(athlete)
+            generalList.append(liEl)
+        }
+
+        function createGeneralListItem(text) {
+            const liEl = document.createElement('li')
+            liEl.innerText = text
+            const iEl = document.createElement('i')
+            iEl.classList = "fa-solid fa-arrow-right list__icon list__icon--color-general-list"
+            liEl.append(iEl)
+
+            liEl.addEventListener('click', event => {
+                const newLiEl = createCompetitionListItem(text)
+                competitionList.append(newLiEl)
+                liEl.remove()
+            })
+
+            return liEl
+        }
+
+        function createCompetitionListItem(text) {
+            const liEl = document.createElement('li')
+            liEl.innerText = text
+            const iEl = document.createElement('i')
+            iEl.classList = "fa-solid fa-arrow-left list__icon list__icon--color-competition-list"
+            liEl.append(iEl)
+
+            liEl.addEventListener('click', event => {
+                const newLiEl = createGeneralListItem(text)
+                generalList.append(newLiEl)
+                liEl.remove()
+            })
+
+            return liEl
+        }
+
+    </script>
+</body>
+
+</html>
