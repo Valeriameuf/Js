@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача </title>
+    <style>
+        body {
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 300px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin: 15px 0 0 15px;
+        }
+
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .controls label {
+            margin-right: 10px;
+        }
+
+        .controls input {
+            margin: 15px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .controls button {
+            padding: 8px 16px;
+            background-color: #c21296;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Задача</h1>
+    <p>Розробити форму для введення логіна і пароля.</p>
+    <span>Кнопка буде активною тільки тоді, коли буде задано логін і пароль.</span>
+    <div class="container">
+        <form class="controls">
+            <label for="login">Login:</label>
+            <input type="text" id="login" value="">
+
+            <label for="password">Password:</label>
+            <input type="text" id="password" value="">
+
+            <button id="submit" type="submit" disabled>Login</button>
+        </form>
+    </div>
+    <script>
+        const loginEl = document.querySelector('#login')
+        const passwordEl = document.querySelector('#password')
+        const btnSubmitEl = document.querySelector('#submit')
+
+        function isFormValid() {
+            return loginEl.value.length > 0 && passwordEl.value.length > 0
+        }
+        function handleInputKeyup() {
+            if (isFormValid()) {
+                if (btnSubmitEl.hasAttribute('disabled')) {
+                    btnSubmitEl.removeAttribute('disabled')
+                }
+            } else {
+                btnSubmitEl.setAttribute('disabled', 'true')
+            }
+        }
+        loginEl.addEventListener('keyup', handleInputKeyup)
+        passwordEl.addEventListener('keyup', handleInputKeyup)
+
+    </script>
+</body>
+
+</html>
