@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 7</title>
+</head>
+
+<body>
+    <h1>Задача 7</h1>
+    <p>Тренажер додавання. Кожні 10 секунд користувачу задають випадковий приклад з додавання двох цифр
+        і робиться перевірка</p>
+    <script>
+        function getRandNum(min, max) {
+            return min + Math.floor(Math.random() * (max - min + 1))
+        }
+        function test() {
+            const firstNumber = getRandNum(1, 100)
+            const secondNumber = getRandNum(1, 100)
+            const result = firstNumber + secondNumber
+            const exercise = `${firstNumber} + ${secondNumber}`
+            let userAnswer = prompt(`Розв'яжіть наступний приклад "${exercise}"`)
+
+            if (userAnswer === null) {
+                return
+            }
+            userAnswer = parseInt(userAnswer)
+            if (userAnswer === result) {
+                alert('Правильна відповідь')
+            } else {
+                alert(`Неправильно. Правильна відповідь: "${result}"`)
+            }
+        }
+        test()
+        setInterval(test, 10000)
+    </script>
+</body>
+
+</html>

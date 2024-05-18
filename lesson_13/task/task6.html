@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 6</title>
+</head>
+
+<body>
+    <h1>Задача 6</h1>
+    <p>З використанням замикань розробити ітератор, тобто функцію, що буде поступово за окремими
+        викликами видавати по одну
+        букву наперед заданого слова. З використанням нього розробити гру «Прекладач». Виводимо для
+        користувача опис цього слова
+        і по одну букву користувач вводить переклад цього слова. Підрахувати кількість вгаданих букв.</p>
+    <script>
+
+        let descriptions = {
+            cat: 'Тварина яка робить "мяу"',
+            dog: 'Тварина яка робить "гав"'
+        }
+
+        function getWordIterator(word) {
+            let currentPos = 0
+
+            return function iterate() {
+                if (currentPos === word.length) {
+                    throw new Error('Iterator reached the end of the word')
+                }
+                return word[currentPos++]
+            }
+        }
+
+        generalLoop: for (const word of Object.keys(descriptions)) {
+            const description = descriptions[word]
+            let numberUserRightAnswers = 0
+
+            const iterator = getWordIterator(word)
+
+            let isWordEnd = false
+
+            do {
+                try {
+                    const currentLetter = iterator()
+                    let userAnswer = prompt(`Введіть наступну літеру слова яке описане наступним чином: ${description}`)
+                    if (userAnswer === null) {
+                        continue generalLoop
+                    }
+                    if (userAnswer.toLowerCase() === currentLetter) {
+                        numberUserRightAnswers++
+                    }
+                } catch (error) {
+                    isWordEnd = true
+                }
+            } while (!isWordEnd)
+
+            if (word.length === numberUserRightAnswers) {
+                alert(`Загадане слово: ${word}. Ваша відповідь вірна`)
+            } else {
+                alert(`Загадане слово: ${word}. Кількість правельних відповідей ${numberUserRightAnswers}`)
+            }
+        }
+    </script>
+</body>
+
+</html>

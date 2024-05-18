@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 4</title>
+</head>
+
+<body>
+    <h1>Задача 4</h1>
+    <p>Дано масив хлопців і дівчат вивести всі можливі комбінації для танців з хлопців і дівчат.</p>
+    <script>
+        const girls = ['Anna', 'Maria', 'Valeria']
+        const boys = ['Tomas', 'Edvard', 'Cristian']
+        function showRes(resArr) {
+            resArr.forEach(el => {
+                document.write(`${el}<br>`)
+            })
+        }
+        function generateDanceCouplesWrapper(girls, boys) {
+            const couples = []
+
+            function generateDanceCouples(girls, boys) {
+                if (boys.length > 0) {
+                    for (const girl of girls) {
+                        const newPair = `${girl}-${boys[0]}`
+
+                        if (!couples.includes(newPair)) {
+                            couples.push(newPair)
+                        }
+
+                        generateDanceCouples(
+                            girls.filter(el => el !== girl),
+                            boys.slice(1)
+                        )
+                    }
+                }
+            }
+
+            generateDanceCouples(girls, boys)
+            showRes(couples)
+        }
+        generateDanceCouplesWrapper(girls, boys)
+
+    </script>
+</body>
+
+</html>

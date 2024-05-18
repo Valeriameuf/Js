@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 3</title>
+    <style>
+        body {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        td {
+            border: 1px solid black;
+        }
+
+        table {
+            margin: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Задача 3</h1>
+    <p>Виведіть всі можливі наступні комбінації ходів користувачів у грі“Хрестики-нулики”, починаючи з деякої заданої
+        ситуації (тобто маємо двовимірний масив з елементами : 0 - нулик, Х - хрестик, пробіл - ще не зайнято, і вам
+        треба самостійно вивести всі можливі шляхи заповнення ще незаповнених клітинок (де пробіли). Поки можна не
+        підраховувати чи вже є 3 хрестики чи 3 нулики у рядок.</p>
+    <script>
+        let matr = [
+            [0, 1, ' '],
+            [0, ' ', ' '],
+            [' ', 1, ' '],
+        ]
+        function generate(matr, freeItemsLeft) {
+            if (freeItemsLeft === 0) {
+                document.body.append(generateTable(matr))
+            }
+            else {
+                for (let i = 0; i < matr.length; i++) {
+                    for (let j = 0; j < matr[i].length; j++) {
+                        if (matr[i][j] === ' ') {
+                            let matrCopy1 = JSON.parse(JSON.stringify(matr))
+                            matrCopy1[i][j] = 0
+                            generate(matrCopy1, freeItemsLeft - 1)
+                            let matrCopy2 = JSON.parse(JSON.stringify(matr))
+                            matrCopy2[i][j] = 1
+                            generate(matrCopy2, freeItemsLeft - 1)
+                        }
+                    }
+                }
+            }
+        }
+        function generateTable(matr) {
+            const tableEl = document.createElement('table')
+            for (const row of matr) {
+                const rowEl = document.createElement('tr')
+                for (const col of row) {
+                    const colEl = document.createElement('td')
+                    colEl.innerText = col
+                    rowEl.append(colEl)
+                }
+                tableEl.append(rowEl)
+            }
+            return tableEl
+        }
+        generate(matr, 5)
+    </script>
+</body>
+
+</html>
