@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 3</title>
+    <style>
+        body {
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Задача 3</h1>
+    <p>Розробити Класи</p>
+    <script>
+        class Image {
+            constructor(coordinateX, coordinateY, imgPath, updateInterval) {
+                this.coordinateX = coordinateX
+                this.coordinateY = coordinateY
+                this.imgPath = imgPath
+                this.updateInterval = updateInterval
+                this.imgEl = this.createImgEl()
+            }
+            createImgEl() {
+                const node = document.createElement('img')
+                node.setAttribute('src', this.imgPath)
+                node.style.position = 'absolute'
+                node.style.top = `${this.coordinateY}px`
+                node.style.left = `${this.coordinateX}px`
+                document.body.append(node)
+
+                return node
+            }
+            getRandOffSet(min, max) {
+                return min + Math.floor(Math.random() * (max - min + 1))
+            }
+        }
+        class House extends Image {
+            constructor(coordinateX, coordinateY, imgPath, updateInterval, imgWidth, imgHeight) {
+                super(coordinateX, coordinateY, imgPath, updateInterval)
+                this.imgWidth = imgWidth
+                this.imgHeight = imgHeight
+                this.isOrigSize = true
+                this.update()
+            }
+            createImgEl() {
+                const node = super.createImgEl()
+                node.setAttribute('width', this.imgWidth)
+                node.setAttribute('height', this.imgHeight)
+
+                return node
+            }
+            update() {
+                setInterval(() => {
+                    if (this.isOrigSize) {
+                        this.imgWidth /= 2
+                        this.imgHeight /= 2
+                    } else {
+                        this.imgWidth *= 2
+                        this.imgHeight *= 2
+                    }
+                    this.imgEl.setAttribute('width', this.imgWidth)
+                    this.imgEl.setAttribute('height', this.imgHeight)
+                    this.isOrigSize = !this.isOrigSize
+                }, this.updateInterval)
+            }
+        }
+        class Dog extends Image {
+            constructor(coordinateX, coordinateY, imgPath, updateInterval) {
+                super(coordinateX, coordinateY, imgPath, updateInterval)
+                this.update()
+            }
+            update() {
+                setInterval(() => {
+                    let newCoordineteX = this.coordinateX + this.getRandOffSet(10, 100)
+                    if (newCoordineteX > window.innerWidth) {
+                        newCoordineteX = 0
+                    }
+                    this.coordinateX = newCoordineteX
+                    this.imgEl.style.left = `${this.coordinateX}px`
+                }, this.updateInterval)
+            }
+        }
+        class Bird extends Image {
+            constructor(coordinateX, coordinateY, imgPath, updateInterval) {
+                super(coordinateX, coordinateY, imgPath, updateInterval)
+                this.update()
+            }
+            update() {
+                setInterval(() => {
+                    let newCoordineteX = this.coordinateX + this.getRandOffSet(10, 100)
+                    let newCoordinateY = this.coordinateY + this.getRandOffSet(-50, 50)
+                    if (newCoordineteX > window.innerWidth) {
+                        newCoordineteX = 0
+                    }
+                    if (newCoordinateY > window.innerHeight || newCoordinateY < 0) {
+                        newCoordinateY = 0
+                    }
+                    this.coordinateX = newCoordineteX
+                    this.coordinateY = newCoordinateY
+                    this.imgEl.style.left = `${this.coordinateX}px`
+                    this.imgEl.style.top = `${this.coordinateY}px`
+                }, this.updateInterval)
+            }
+        }
+        const bird = new Bird(100, 0, "img/bird.jpg", 1000)
+        const house = new House(100, 600, "img/house.jpeg", 3000, 768, 512)
+        const dog = new Dog(100, 1200, "img/dog.jpg", 1000)
+
+
+    </script>
+</body>
+
+</html>

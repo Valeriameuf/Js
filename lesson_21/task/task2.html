@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 2</title>
+</head>
+
+<body>
+    <h1>Задача 2</h1>
+    <p>Створити клас Bank, у якому зберігається масив клієнтів. Виконати такі операції</p>
+    <ol>
+        <li>Вивести всіх простих клієнтів;</li>
+        <li>Вивести всіх клієнтів GoldenClient</li>
+        <li>Знайти сумарну кількість грошей на рахунку</li>
+    </ol>
+    <script src="client.js"></script>
+    <script>
+        class Bank {
+            constructor(clients) {
+                this.clients = clients
+            }
+            showRegularClients() {
+                this.clients.forEach(client => {
+                    if (client instanceof RegularClient) {
+                        document.write(`${client}<br>`)
+                    }
+                })
+            }
+            showGoldenClients() {
+                this.clients.forEach(client => {
+                    if (client instanceof GoldenClient) {
+                        document.write(`${client}<br>`)
+                    }
+                })
+            }
+            getTotalBalance() {
+                return this.clients.reduce((accumulator, client) => accumulator + client.balance, 0)
+            }
+        }
+        const regularClient = new RegularClient(34567, 'Valeria Petrushevska', 15000)
+        const goldenClient = new GoldenClient(45678, 'Maria Ivanova', -10000, 10000, 2)
+        const bank = new Bank([regularClient, goldenClient])
+        bank.showRegularClients()
+        bank.showGoldenClients()
+        document.write(`Поточний баланс банку: ${bank.getTotalBalance()}`)
+    </script>
+</body>
+
+</html>

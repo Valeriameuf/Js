@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 1</title>
+</head>
+
+<body>
+    <h1>Задача 1</h1>
+    <p>Створити клас Client</p>
+    <p>На основі цього класу створити клас GoldenClient</p>
+    <script src="client.js"></script>
+    <script>
+        const goldenClient = new GoldenClient(12345, 'Ivan Ivanov', 0, 10000, 2)
+        goldenClient.putMoney(5000)
+        goldenClient.withdrawMoney(15000)
+        const penelty = goldenClient.getCreditMoneyPenalty()
+        document.write(`Пеня за використання кредитних грошей: ${penelty}`)
+        goldenClient.withdrawMoney(1000)
+    </script>
+</body>
+
+</html>

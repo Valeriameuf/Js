@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 4</title>
+</head>
+
+<body>
+    <h1>Задача 4</h1>
+    <p>Користувач задає місяць навчання учня (перевіряти чи є числом, чи від 1 до 12, чи не канікули) та оцінку
+        (перевіряти чи
+        є числом, чи від 1 до 100). Вивести чи зможе він виправити оцінку (якщо оцінка погана і це не останній місяць у
+        семестрі) . Обробку усіх помилок зробити з використанням відповідних класів.</p>
+    <script>
+        class IsNotNumberError extends Error {
+            constructor() {
+                super()
+                this.message = 'Має бути числом'
+                this.name = 'IsNotNumberError'
+            }
+        }
+        class MonthRangeError extends RangeError {
+            constructor() {
+                super()
+                this.message = 'Місяць має бути у проміжку від 1 до 12'
+                this.name = 'MonthRangeError'
+            }
+        }
+        class MarkRangeError extends RangeError {
+            constructor() {
+                super()
+                this.message = 'Оцінка має бути у проміжку від 1 до 100'
+                this.name = 'MarkRangeError'
+            }
+        }
+        class IsLastSemesterMonthError extends Error {
+            constructor() {
+                super()
+                this.message = 'Місяць має бути не 12 і не 5 місяцем у році'
+                this.name = 'IsLastSemesterMonthError'
+            }
+        }
+        class IsVacationRangeError extends RangeError {
+            constructor() {
+                super()
+                this.message = 'Місяць має бути у проміжку від 9 до 5 місяця включно'
+                this.name = 'IsVacationRangeError'
+            }
+        }
+        class IsGoodMarkError extends Error {
+            constructor() {
+                super()
+                this.message = 'Оцінка має бути нижча за 60 балів'
+                this.name = 'IsGoodMarkError'
+            }
+        }
+        class FixingMark {
+            constructor(month, mark) {
+                this.month = month
+                this.mark = mark
+            }
+            set month(month) {
+                if (isNaN(month)) {
+                    throw new IsNotNumberError()
+                }
+                month = parseInt(month)
+                if (month < 1 || month > 12) {
+                    throw new MonthRangeError()
+                }
+                if (month === 12 || month === 5) {
+                    throw new IsLastSemesterMonthError()
+                }
+                if (month > 5 && month < 9) {
+                    throw new IsVacationRangeError()
+                }
+                this.Month = month
+            }
+            set mark(mark) {
+                if (isNaN(mark)) {
+                    throw new IsNotNumberError()
+                }
+                mark = parseInt(mark)
+                if (mark < 1 || mark > 100) {
+                    throw new MarkRangeError()
+                }
+                if (mark >= 60) {
+                    throw new IsGoodMarkError()
+                }
+                this.Mark = mark
+            }
+        }
+        const userMonth = prompt('Введіть місяць навчання:')
+        const userMark = prompt('Введіть оцінку:')
+        try {
+            const fixingMark = new FixingMark(userMonth, userMark)
+            alert('Ви можете виправити оцінку')
+        } catch (error) {
+            alert(`${error.message}, ERROR_NAME: ${error.name}`)
+        }
+    </script>
+</body>
+
+</html>
