@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 3</title>
+</head>
+
+<body>
+    <h1>Задача 3</h1>
+    <p>Визначити скільки залишилось до кінця робочого дня (до 17.00)
+    </p>
+    <script>
+        function msToTime(duration) {
+            let milliseconds = Math.floor((duration % 1000) / 100),
+                seconds = Math.floor((duration / 1000) % 60),
+                minutes = Math.floor((duration / (1000 * 60)) % 60),
+                hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+            hours = (hours < 10) ? "0" + hours : hours;
+            minutes = (minutes < 10) ? "0" + minutes : minutes;
+            seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+            return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
+        }
+
+        function getTimeTillWorkdayEnd() {
+            const finishWorkDay = new Date()
+            finishWorkDay.setHours(17)
+            finishWorkDay.setMinutes(0)
+            finishWorkDay.setSeconds(0)
+
+            const currentDate = new Date()
+
+            let diff = finishWorkDay - currentDate
+            diff = Math.max(diff, 0)
+
+            return msToTime(diff)
+        }
+
+        document.write(`До кінця рабочого дня залишилося: ${getTimeTillWorkdayEnd()}`)
+    </script>
+</body>
+
+</html>

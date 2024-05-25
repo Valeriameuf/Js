@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 2</title>
+</head>
+
+<body>
+    <h1>Задача 2</h1>
+    <p>Вводимо час початку процедури (процедура триває 30хв). Визначити, чи процедура ще триває.</p>
+    <script>
+        class HoursRangeError extends RangeError {
+            constructor() {
+                super()
+                this.message = 'Hours must be between 0 and 24'
+                this.name = 'HoursRangeError'
+            }
+        }
+        class MinutesRangeError extends RangeError {
+            constructor() {
+                super()
+                this.message = 'Minutes must be between 0 and 60'
+                this.name = 'MinutesRangeError'
+            }
+        }
+        class IsNotNumberError extends Error {
+            constructor(message) {
+                super()
+                this.message = message
+                this.name = 'IsNotNumberError'
+            }
+        }
+
+        function isValidTime(hours, minutes) {
+            if (isNaN(hours)) {
+                throw new IsNotNumberError('Hours must be a valid number')
+            }
+            if (isNaN(minutes)) {
+                throw new IsNotNumberError('Minutes must be a valid number')
+            }
+
+            if (hours < 0 || hours > 24) {
+                throw new HoursRangeError()
+            }
+            if (minutes < 0 || minutes > 60) {
+                throw new MinutesRangeError()
+            }
+        }
+
+        function checkProcedureTime() {
+            const procedureDurationMinutes = 30
+            let userTime = prompt('Введіть час початку процедури у форматі "години:хвилини"')
+
+            if (userTime === null) {
+                return
+            }
+
+            [userHours, userMinutes] = userTime.split(':')
+            userHours = parseInt(userHours)
+            userMinutes = parseInt(userMinutes)
+
+            try {
+                isValidTime(userHours, userMinutes)
+            } catch (error) {
+                alert(error.message)
+                return
+            }
+
+            const startDate = new Date()
+            startDate.setHours(userHours)
+            startDate.setMinutes(userMinutes)
+            startDate.setSeconds(0)
+
+            const finishDate = new Date(startDate)
+            finishDate.setMinutes(startDate.getMinutes() + procedureDurationMinutes)
+
+            setInterval(() => {
+                const currentDate = new Date()
+                if (currentDate < finishDate) {
+                    document.write('Процедура ще триває<br>')
+                }
+            }, 60000)
+        }
+        checkProcedureTime()
+    </script>
+</body>
+
+</html>
