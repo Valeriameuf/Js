@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header></header>
+        <main class="main">
+            <h1>Задачі</h1>
+            <p>Усі задачі можете оформити у одному файлі (так, як ми робимо на лекції)</p>
+            <ol>
+                <li>Дано масив рядків. Вивести ті, у яких є цифри (використати метод test та регулярні вирази).</li>
+                <li>Дано масив рядків. Вивести ті, у яких немає цифр.</li>
+                <li>Дано масив рядків. Вивести ті, у яких є голосні літери.</li>
+                <li>Дано масив рядків. Вивести ті, у яких немає голосних літер.</li>
+                <li>Дано масив рядків. Вивести ті, у яких є або цифра 1 або цифра 3.</li>
+                <li>Дано рядок тексту, вивести усі числа, які є у тексті.</li>
+                <li>Дано рядок тексту. Знайти усі знаки пунктуації, які були використано.</li>
+                <li>Дано рядок тексту. Вивести усі складові, які розділені розділовими знаками.</li>
+                <li>Дано рядок тексту. Перевірити, чи містить він дату у форматі dd.mm.yyyy (dd- день, mm- місяць, yyyy-
+                    рік).</li>
+                <li>Дано рядок тексту. Підрахувати кількість двоцифрових чисел у рядку.</li>
+                <li>Визначити чи може бути рядок тексту номером банківської картки (приклад: «4142-3433-2323-3434»).
+                    Знайти усі такі номери.</li>
+                <li>Дано адресу сайту. Визначити, чи є він урядовим (містить домен “gov”)</li>
+                <li>Вибрати усі роки після 2021 року з отриманого повідомлення</li>
+                <li>Дано номер телефону. Перевірити, чи є цей телефон телефоном з України (починається на «+38»)</li>
+                <li>Користувач вводить прізвище та ім’я в одному рядку через пробіл. Замінити пробіл на дефіс.</li>
+                <li>Користувач вводить дату у форматі «день.місяць.рік». Отримати рядкове представлення дати у форматі
+                    «день/місяць/рік»</li>
+                <li>Користувач вводить день (номер дня (0-6) або «sun,mon,tue,wed,thu,fri,sat»). Визначити, чи є це день
+                    вихідним</li>
+            </ol>
+        </main>
+    </div>
+    <script>
+        function task1() {
+            const rows = ["cat34", "dog", "bird67"]
+            document.write(`${rows.filter(row => /[\d]/.test(row))}<br>`)
+        }
+        task1()
+
+        function task2() {
+            const rows = ["cat34", "dog", "bird67"]
+            document.write(`${rows.filter(row => /^\D*$/.test(row))}<br>`)
+        }
+        task2()
+
+        function task3() {
+            const rows = ["квітка", "прктгд"]
+            document.write(`${rows.filter(row => /[аАеЕєЄиИіІїЇоОуУюЮяЯ]+/.test(row))}<br>`)
+        }
+        task3()
+
+        function task4() {
+            const rows = ["квітка", "прктгд"]
+            document.write(`${rows.filter(row => /^[^аАеЕєЄиИіІїЇоОуУюЮяЯ]*$/.test(row))}<br>`)
+        }
+        task4()
+
+        function task5() {
+            const rows = ["cat34", "dog11", "bird67"]
+            document.write(`${rows.filter(row => /[13]+/.test(row))}<br>`)
+        }
+        task5()
+
+        function task6() {
+            const row = 'На свято мені подарували 500 гривень, а мій тато кладе до кави 3 ложечки цукру.'
+            document.write(`${row.match(/\d+/g)}<br>`)
+        }
+        task6()
+
+        function task7() {
+            const row = 'Голубі, сині, фіолетові, рожеві пасма снувались над горами.'
+            document.write(`${row.match(/\p{P}+/gu)}<br>`)
+        }
+        task7()
+
+        function task8() {
+            const text = 'Голубі, сині, фіолетові, рожеві пасма снувались над горами.'
+            document.write(`${text.split(/[\p{P}]{1}/u).filter(el => el !== '').map(el => el.trim())}<br>`)
+        }
+        task8()
+
+        function task9(text) {
+            const date = /\b\d{2}\.\d{2}\.\d{4}\b/
+            if (date.test(text)) {
+                document.write(`Дата знайдена в тексті:"${text.match(date)}"<br>`)
+            } else {
+                document.write(`Дата не знайдена в тексті:"${text}"<br>`)
+            }
+        }
+        task9('Зустріч відбудеться 26.04.2023 о 9:00')
+        task9('Чекаю тебе завтра о 15:00')
+
+        function task10() {
+            const text = '55 номер журналу став вершиною успіху видавництва.'
+            const numberReg = /\b\d{2}\b/g
+            const matches = text.match(numberReg)
+            document.write(`Кількість двоцифрових чисел у рядку:${matches.length}<br>`)
+        }
+        task10()
+
+        function task11(text) {
+            const cartNumberReg = /\b\d{4}[-\s]?\d{4}[-\s]?\d{4}[-\s]?\d{4}\b/g
+            const matches = text.match(cartNumberReg)
+
+            if (matches) {
+                document.write(`Знайдені номери банківських карток:<br>`)
+                for (const match of matches) {
+                    document.write(`${match}<br>`);
+                }
+            } else {
+                document.write(`Номери банківських карток не знайдено.<br>`)
+            }
+        }
+        task11('Мій номер картки: 4142-3433-2323-3434. Не забудьте сплатити 4111 1111 1111 1111. 4111111111111111')
+        task11('Чекаю тебе завтра о 15:00')
+
+        function task12(urlStr) {
+            try {
+                const url = new URL(urlStr)
+                const isGovDomain = /\.gov$/.test(url.hostname)
+
+                document.write('<h3>Перевірка урядового сайту:</h3>')
+                if (isGovDomain) {
+                    document.write(`${urlStr} - це урядовий сайт.<br>`)
+                } else {
+                    document.write(`${urlStr} - не є урядовим сайтом.<br>`)
+                }
+            } catch (error) {
+                document.write(`<h4>Помилка:</h4>${error.message}<br>`)
+            }
+        }
+        task12('https://www.whitehouse.gov')
+        task12('https://www.example.com')
+        task12('invalid_url')
+
+        function task13() {
+            const text = 'У 2021 році ми жили у Києві,але після 2022 року ми переїхали в нове місто, а у 2023 році купили квартиру.'
+            document.write(`${text.match(/\b20[2-9][2-9]\b/g)}<br>`)
+        }
+        task13()
+
+        function task14(userPhone) {
+            const reg = /[^\d]/g
+            const preparedUserPhone = userPhone.replace(reg, '')
+            if (preparedUserPhone.startsWith('38')) {
+                document.write(`${userPhone} є українським номером<br>`)
+            } else {
+                document.write(`${userPhone} не є українським номером<br>`)
+            }
+        }
+        task14('+38(066)357-68-72')
+
+        function task15() {
+            let userFullname = prompt("Введіть своє призвище та ім'я:")
+
+            if (userFullname === null) {
+                return
+            }
+            userFullname = userFullname.trim()
+            userFullname = userFullname.replace(/\s+/, '-')
+            alert(userFullname)
+        }
+        task15()
+
+        function task16() {
+            let userDate = prompt("Введіть довільну дату у форматі «день.місяць.рік»:")
+            if (userDate === null) {
+                return
+            }
+            userDate = userDate.replaceAll('.', '/')
+
+            alert(userDate)
+        }
+        task16()
+
+        function task17() {
+            const userDay = prompt("Введіть довільний день у форматі номер дня (0-6) або «sun,mon,tue,wed,thu,fri,sat»")
+
+            if (userDay === null) {
+                return
+            }
+
+            const matches = userDay.match(/^[0-4]|(5|6)|mon|tue|wed|thu|fri|(sat|sun)$/)
+
+            if (matches === null) {
+                alert('Введіть коректне значення')
+                return
+            }
+
+            if (matches[1] === undefined && matches[2] === undefined) {
+                alert('Це робочий день')
+            } else {
+                alert('Це вихідний день')
+            }
+        }
+        task17()
+    </script>
+</body>
+
+</html>
