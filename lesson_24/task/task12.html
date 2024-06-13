@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 12</title>
+</head>
+
+<body>
+    <h1>Задача 12</h1>
+    <p>Зберігати у пам’яті список справ, які користувачу треба виконати
+        (зберігати у localStorage).Періодично випадковим чином вибирати якусь з справ
+        і виводити користувачу(з використанням confirm).
+        Якщо користувач натискає на «Ок», то видаляти цю задачу.</p>
+    <script>
+        function getRandomInt(min, max) {
+            min = Math.ceil(min)
+            max = Math.floor(max)
+            return Math.floor(Math.random() * (max - min + 1)) + min
+        }
+
+        function getTaskRandKey(tasksMap, origTasksMapSize) {
+            while (true) {
+                const randTaskKey = `task${getRandomInt(0, origTasksMapSize - 1)}`
+
+                if (!tasksMap.has(randTaskKey)) {
+                    continue
+                }
+
+                return randTaskKey
+            }
+        }
+
+        function createTasksMap(mapSize) {
+            const tasksMap = new Map()
+
+            for (let i = 0; i < mapSize; i++) {
+                tasksMap.set(`task${i}`, `task${i}`)
+            }
+
+            return tasksMap
+        }
+
+        function fillLocalStorage(tasksMap) {
+            tasksMap.forEach((value, key) => {
+                localStorage.setItem(key, value)
+            })
+        }
+
+        const origTasksMapSize = 5
+        const tasksMap = createTasksMap(origTasksMapSize)
+
+        fillLocalStorage(tasksMap)
+
+        const timer = setInterval(() => {
+            if (tasksMap.size <= 0) {
+                alert('Усі задачі виконані')
+                clearInterval(timer)
+                return
+            }
+
+            const randTaskKey = getTaskRandKey(tasksMap, origTasksMapSize)
+            const taskText = localStorage.getItem(randTaskKey)
+
+            if (taskText === undefined) {
+                throw new Error('Task not found in localStorage but exists in tasksMap')
+            }
+
+            if (confirm(taskText)) {
+                tasksMap.delete(randTaskKey)
+                localStorage.removeItem(randTaskKey)
+            }
+
+            console.log(tasksMap)
+            console.log(localStorage)
+        }, 1500)
+    </script>
+</body>
+
+</html>

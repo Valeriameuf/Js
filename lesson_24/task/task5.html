@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 5</title>
+</head>
+
+<body>
+    <h1>Задача 5</h1>
+    <p>Дано список URL адрес. Підрахувати кількість адрес, що відносяться
+        до кожного із доменів (edu, com, org,...).</p>
+    <script>
+        const urls = ['dtuyui.edu', 'dksdkfdfg.com', 'jwklfl.org', 'kdsklfdfld.com']
+        const zones = urls.map(url => {
+            const params = url.split('.')
+            //return params[2]
+            return params[params.length - 1]
+        })
+        const allZones = [...new Set(zones)]
+
+        let numberZones = {}
+        allZones.forEach(zone => {
+            console.log(numberZones, zone)
+            numberZones[zone] = urls.filter(url => {
+                const params = url.split('.')
+                return params[params.length - 1] === zone
+            }).length
+        })
+        console.log(numberZones)
+    </script>
+</body>
+
+</html>

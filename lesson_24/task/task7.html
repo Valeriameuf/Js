@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 7</title>
+</head>
+
+<body>
+    <h1>Задача 7</h1>
+    <p>Дано інформацію про відвідувачів деякого сайту (для кожного відвідувача зберігається логін). Підрахувати для
+        кожного
+        клієнта кількість відвідувань.</p>
+    <script>
+        const visits = [
+            { login: 'user1' },
+            { login: 'user2' },
+            { login: 'user1' },
+            { login: 'user3' }
+        ]
+        const numberVisits = visits.reduce((data, visit) => {
+            if (!data[visit.login]) {
+                data[visit.login] = 0
+            }
+            data[visit.login]++
+            return data
+        }, {})
+        console.log(numberVisits)
+    </script>
+</body>
+
+</html>

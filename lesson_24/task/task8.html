@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 8</title>
+</head>
+
+<body>
+    <h1>Задача 8</h1>
+    <p>Дано масив студентів (піб, курс, факультет).
+        Підрахувати кількість різних факультетів,
+        та кількість студентів кожного з курсів.</p>
+    <script>
+        const students = [
+            { name: 'Ivan Ivanov', course: 2, faculty: 'Medicine' },
+            { name: 'Tomas Petrov', course: 3, faculty: 'Psychology' },
+            { name: 'John Smith', course: 2, faculty: 'Engineering' },
+            { name: 'Sarah Johnson', course: 1, faculty: 'Computer Science' }
+        ]
+
+        const faculties = new Set(students.map(student => student.faculty))
+
+        const courses = new Map()
+
+        students.forEach(student => {
+            if (!courses.has(student.course)) {
+                courses.set(student.course, 0)
+            }
+            courses.set(student.course, courses.get(student.course) + 1)
+        })
+        document.write(`Кількість факультетів:${faculties.size}<br>`)
+
+        courses.forEach((numberStudent, course) => {
+            document.write(`Курс "${course}", Кількість студентів: ${numberStudent}<br>`)
+        })
+    </script>
+</body>
+
+</html>

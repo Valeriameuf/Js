@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 6</title>
+</head>
+
+<body>
+    <h1>Задача 6</h1>
+    <p>Дано масив книг (назва, рік видання, автор, ціна).
+        Підрахувати загальну вартість книг для кожного із авторів.</p>
+    <script>
+        class Book {
+            constructor(title, year, author, price) {
+                this.title = title
+                this.year = year
+                this.author = author
+                this.price = price
+            }
+        }
+        const books = [
+            new Book('Gtioksjd', 2000, 'Ivan Ivanov', 300),
+            new Book('Gtioksjd', 2020, 'Tom Ivanov', 200),
+            new Book('Gtioksjd', 2000, 'Ivan Ivanov', 400)
+        ]
+
+        const prices = books.reduce((data, book) => {
+            if (!data[book.author]) {
+                data[book.author] = 0
+            }
+            data[book.author] += book.price
+            return data
+        }, {})
+        console.log(prices)
+    </script>
+</body>
+
+</html>
