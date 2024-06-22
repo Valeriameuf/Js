@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 2</title>
+</head>
+
+<body>
+    <h1>Задача 2</h1>
+    <p>Дано Shop -- клас, що містить список товарів (масив об’єктів класу Product
+        (назва, ціна, кількість одиниць).
+        Додати можливість ітератора до класу Shop,
+        щоб при ітеруванні для кожного елемента виводився рядок «товар-загальна
+        вартість»</p>
+    <script>
+        class Product {
+            constructor(name, price, quantity) {
+                this.name = name
+                this.price = price
+                this.quantity = quantity
+            }
+            getSum() {
+                return this.price * this.quantity
+            }
+            [Symbol.toPrimitive](hint) {
+                let result
+                switch (hint) {
+                    case 'number':
+                        result = this.getSum();
+                        break
+                    case 'string':
+                        result = this.name
+                        break
+                    default:
+                        result = `${this.name} - ${this.price}`
+                        break
+                }
+                return result
+            }
+        }
+
+        class Shop {
+            constructor() {
+                this.products = []
+            }
+            [Symbol.iterator]() {
+                this.index = 0
+                return this
+            }
+            next() {
+                if (this.index < this.products.length) {
+                    const currentProduct = this.products[this.index]
+                    const totalPrice = currentProduct.getSum()
+
+                    this.index++
+
+                    return {
+                        done: false,
+                        value: `${currentProduct.name} - загальна вартість:${totalPrice}`
+                    }
+                }
+
+                return {
+                    done: true
+                }
+            }
+            addProduct(product) {
+                this.products.push(product)
+            }
+        }
+        const shop = new Shop()
+        shop.addProduct(new Product("Телевизор", 10000, 2))
+        shop.addProduct(new Product("Холодильник", 15000, 1))
+        shop.addProduct(new Product("Стиральная машина", 8000, 3))
+
+        for (const product of shop) {
+            document.write(`${product}<br>`)
+        }
+
+    </script>
+</body>
+
+</html>

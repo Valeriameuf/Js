@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 1</title>
+</head>
+
+<body>
+    <h1>Задача 1</h1>
+    <p>Дано клас PhoneNumber. Створити функцію перетворення до string,
+        при якому на основі номера виводиться оператор
+        (050…. 🡪 MTC, 096… 🡪 Kyivstar, ….)</p>
+    <script>
+        class PhoneNumber {
+            constructor(number) {
+                this.number = number
+            }
+            //Сделать так чтобы можно было вводить 380...
+            [Symbol.toPrimitive](hint) {
+                if (hint === 'string') {
+                    const prefix = this.number.substring(0, 3)
+                    let operator
+
+                    switch (prefix) {
+                        case '050':
+                        case '066':
+                        case '095':
+                        case '099':
+                            operator = 'MTC'
+                            break
+                        case '067':
+                        case '068':
+                        case '096':
+                        case '097':
+                        case '098':
+                            operator = 'Kyivstar'
+                            break
+                        case '063':
+                        case '073':
+                        case '093':
+                            operator = 'Lifecell'
+                            break
+                        default:
+                            operator = 'Невідомий оператор'
+                    }
+
+                    return `[${operator}] ${this.number}`
+                }
+
+                return this.number
+            }
+        }
+        const phoneNumber = new PhoneNumber('0633480218')
+        document.write(`${phoneNumber}`)
+    </script>
+</body>
+
+</html>
